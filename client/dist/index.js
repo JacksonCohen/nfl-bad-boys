@@ -2253,7 +2253,35 @@ if ("development" === 'production') {
 } else {
   module.exports = require('./cjs/react.development.js');
 }
-},{"./cjs/react.development.js":"../../node_modules/react/cjs/react.development.js"}],"components/SearchBar.jsx":[function(require,module,exports) {
+},{"./cjs/react.development.js":"../../node_modules/react/cjs/react.development.js"}],"components/SupportDecision.jsx":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireDefault(require("react"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var SupportDecision = function SupportDecision(props) {
+  return _react.default.createElement(_react.default.Fragment, null, props.searchBar ? null : props.crimes.length ? _react.default.createElement("center", {
+    className: "verdict",
+    style: {
+      color: "red"
+    }
+  }, "NO") : _react.default.createElement("center", {
+    className: "verdict",
+    style: {
+      color: "green"
+    }
+  }, "YES"));
+};
+
+var _default = SupportDecision;
+exports.default = _default;
+},{"react":"../../node_modules/react/index.js"}],"components/SearchBar.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -2266,15 +2294,16 @@ var _react = _interopRequireDefault(require("react"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var SearchBar = function SearchBar(props) {
-  return _react.default.createElement(_react.default.Fragment, null, _react.default.createElement("form", {
+  return _react.default.createElement(_react.default.Fragment, null, props.searchBar ? _react.default.createElement("form", {
     className: "search-bar",
     onSubmit: props.handleSubmit
   }, _react.default.createElement("input", {
+    className: "input-bar",
     type: "text",
     placeholder: "SEARCH FOR A PLAYER e.g. Kenny Britt",
     value: props.searchValue,
     onChange: props.handleChange
-  })));
+  })) : null);
 };
 
 var _default = SearchBar;
@@ -2339,7 +2368,7 @@ function (_Component) {
     value: function render() {
       var _this2 = this;
 
-      return _react.default.createElement(_react.default.Fragment, null, _react.default.createElement("ul", null, this.props.crimes && this.props.crimes.map(function (crime) {
+      return _react.default.createElement(_react.default.Fragment, null, this.props.searchBar ? null : _react.default.createElement("ul", null, this.props.crimes && this.props.crimes.map(function (crime) {
         return _react.default.createElement("li", {
           key: crime.arrest_stats_id,
           onClick: _this2.handleClick
@@ -2354,6 +2383,27 @@ function (_Component) {
 }(_react.Component);
 
 var _default = RapSheet;
+exports.default = _default;
+},{"react":"../../node_modules/react/index.js"}],"components/Footer.jsx":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireDefault(require("react"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var Footer = function Footer(props) {
+  return _react.default.createElement(_react.default.Fragment, null, props.searchBar ? null : _react.default.createElement("h3", {
+    className: "footer",
+    onClick: props.handleClick
+  }, "Check another player? Click here!"));
+};
+
+var _default = Footer;
 exports.default = _default;
 },{"react":"../../node_modules/react/index.js"}],"../../node_modules/axios/lib/helpers/bind.js":[function(require,module,exports) {
 'use strict';
@@ -4000,35 +4050,7 @@ module.exports.default = axios;
 
 },{"./utils":"../../node_modules/axios/lib/utils.js","./helpers/bind":"../../node_modules/axios/lib/helpers/bind.js","./core/Axios":"../../node_modules/axios/lib/core/Axios.js","./defaults":"../../node_modules/axios/lib/defaults.js","./cancel/Cancel":"../../node_modules/axios/lib/cancel/Cancel.js","./cancel/CancelToken":"../../node_modules/axios/lib/cancel/CancelToken.js","./cancel/isCancel":"../../node_modules/axios/lib/cancel/isCancel.js","./helpers/spread":"../../node_modules/axios/lib/helpers/spread.js"}],"../../node_modules/axios/index.js":[function(require,module,exports) {
 module.exports = require('./lib/axios');
-},{"./lib/axios":"../../node_modules/axios/lib/axios.js"}],"components/SupportDecision.jsx":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-var _react = _interopRequireDefault(require("react"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var SupportDecision = function SupportDecision(props) {
-  return _react.default.createElement(_react.default.Fragment, null, props.crimes.length ? _react.default.createElement("center", {
-    className: "verdict",
-    style: {
-      color: "red"
-    }
-  }, "NO") : _react.default.createElement("center", {
-    className: "verdict",
-    style: {
-      color: "green"
-    }
-  }, "YES"));
-};
-
-var _default = SupportDecision;
-exports.default = _default;
-},{"react":"../../node_modules/react/index.js"}],"components/App.jsx":[function(require,module,exports) {
+},{"./lib/axios":"../../node_modules/axios/lib/axios.js"}],"components/App.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -4038,13 +4060,15 @@ exports.default = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
+var _SupportDecision = _interopRequireDefault(require("./SupportDecision"));
+
 var _SearchBar = _interopRequireDefault(require("./SearchBar"));
 
 var _RapSheet = _interopRequireDefault(require("./RapSheet"));
 
-var _axios = _interopRequireDefault(require("axios"));
+var _Footer = _interopRequireDefault(require("./Footer"));
 
-var _SupportDecision = _interopRequireDefault(require("./SupportDecision"));
+var _axios = _interopRequireDefault(require("axios"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -4081,9 +4105,11 @@ function (_Component) {
     _this = _possibleConstructorReturn(this, _getPrototypeOf(App).call(this, props));
     _this.state = {
       arrestData: [],
-      searchBar: false,
+      searchBar: true,
       searchValue: ''
     };
+    _this.getName = _this.getName.bind(_assertThisInitialized(_this));
+    _this.handleClick = _this.handleClick.bind(_assertThisInitialized(_this));
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
     _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_this));
     return _this;
@@ -4098,7 +4124,8 @@ function (_Component) {
       e.preventDefault();
       var input = this.state.searchValue;
       this.setState({
-        searchBar: true
+        searchBar: !this.state.searchBar,
+        searchValue: ''
       });
       this.getArrests(input);
     }
@@ -4107,6 +4134,14 @@ function (_Component) {
     value: function handleChange(e) {
       this.setState({
         searchValue: e.target.value
+      });
+    }
+  }, {
+    key: "handleClick",
+    value: function handleClick() {
+      this.setState({
+        searchBar: !this.state.searchBar,
+        arrestData: []
       });
     }
   }, {
@@ -4124,22 +4159,63 @@ function (_Component) {
       });
     }
   }, {
+    key: "getName",
+    value: function getName() {
+      var playerName = this.state.searchValue;
+      var properName = '';
+      var splitName = playerName.split(' ');
+      var _iteratorNormalCompletion = true;
+      var _didIteratorError = false;
+      var _iteratorError = undefined;
+
+      try {
+        for (var _iterator = splitName[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+          var name = _step.value;
+          properName += name.charAt(0).toUpperCase() + name.substring(1) + ' ';
+        }
+      } catch (err) {
+        _didIteratorError = true;
+        _iteratorError = err;
+      } finally {
+        try {
+          if (!_iteratorNormalCompletion && _iterator.return != null) {
+            _iterator.return();
+          }
+        } finally {
+          if (_didIteratorError) {
+            throw _iteratorError;
+          }
+        }
+      }
+
+      return properName;
+    }
+  }, {
     key: "render",
     value: function render() {
-      var searchBar = this.state.searchBar;
+      var _this$state = this.state,
+          searchBar = _this$state.searchBar,
+          searchValue = _this$state.searchValue,
+          arrestData = _this$state.arrestData;
       return _react.default.createElement(_react.default.Fragment, null, searchBar ? _react.default.createElement("h1", {
         className: "header"
-      }, "Here's the lowdown on ") : _react.default.createElement("h1", {
+      }, "Ever wondered if you should support a player?") : _react.default.createElement("h1", {
         className: "header"
-      }, "Ever wondered if you should support a player?"), searchBar ? null : _react.default.createElement(_SearchBar.default, {
-        searchValue: this.state.searchValue,
+      }, "Can you trust ", this.getName(searchValue), "?"), _react.default.createElement(_SearchBar.default, {
+        searchBar: searchBar,
+        searchValue: searchValue,
         handleSubmit: this.handleSubmit,
         handleChange: this.handleChange
-      }), searchBar ? _react.default.createElement(_RapSheet.default, {
-        crimes: this.state.arrestData
-      }) : null, searchBar ? _react.default.createElement(_SupportDecision.default, {
-        crimes: this.state.arrestData
-      }) : null);
+      }), _react.default.createElement(_SupportDecision.default, {
+        searchBar: searchBar,
+        crimes: arrestData
+      }), _react.default.createElement(_RapSheet.default, {
+        searchBar: searchBar,
+        crimes: arrestData
+      }), _react.default.createElement(_Footer.default, {
+        searchBar: searchBar,
+        handleClick: this.handleClick
+      }));
     }
   }]);
 
@@ -4148,7 +4224,7 @@ function (_Component) {
 
 var _default = App;
 exports.default = _default;
-},{"react":"../../node_modules/react/index.js","./SearchBar":"components/SearchBar.jsx","./RapSheet":"components/RapSheet.jsx","axios":"../../node_modules/axios/index.js","./SupportDecision":"components/SupportDecision.jsx"}],"../../../../../../node_modules/object-assign/index.js":[function(require,module,exports) {
+},{"react":"../../node_modules/react/index.js","./SupportDecision":"components/SupportDecision.jsx","./SearchBar":"components/SearchBar.jsx","./RapSheet":"components/RapSheet.jsx","./Footer":"components/Footer.jsx","axios":"../../node_modules/axios/index.js"}],"../../../../../../node_modules/object-assign/index.js":[function(require,module,exports) {
 /*
 object-assign
 (c) Sindre Sorhus

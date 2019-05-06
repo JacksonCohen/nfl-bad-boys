@@ -20,6 +20,7 @@ class RapSheet extends Component {
   render() {
     return (
       <>
+        {this.props.searchBar ? null : 
         <ul>
           {this.props.crimes &&
             this.props.crimes.map(crime => {
@@ -30,7 +31,7 @@ class RapSheet extends Component {
                 </li>
               );
             })}
-        </ul>
+        </ul>}
       </>
     );
   }

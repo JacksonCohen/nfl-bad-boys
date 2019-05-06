@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
+import SupportDecision from './SupportDecision';
 import SearchBar from './SearchBar';
 import RapSheet from './RapSheet';
+import Footer from './Footer';
 import axios from 'axios';
-import SupportDecision from './SupportDecision';
 
 class App extends Component {
   constructor(props) {
@@ -10,10 +11,12 @@ class App extends Component {
 
     this.state = {
       arrestData: [],
-      searchBar: false,
+      searchBar: true,
       searchValue: ''
     };
 
+    this.getName = this.getName.bind(this);
+    this.handleClick = this.handleClick.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
   }
@@ -26,7 +29,10 @@ class App extends Component {
     e.preventDefault();
 
     let input = this.state.searchValue;
-    this.setState({ searchBar: true });
+    this.setState({ 
+      searchBar: !this.state.searchBar,
+      searchValue: ''
+    });
     this.getArrests(input);
   }
 
@@ -36,27 +42,46 @@ class App extends Component {
     });
   }
 
+  handleClick() {
+    this.setState({
+      searchBar: !this.state.searchBar,
+      arrestData: []
+    });
+  }
+
   getArrests(player) {
     axios.get(`/arrests/${player}`)
       .then(({ data }) => this.setState({ arrestData: data }))
       .catch(err => console.error(err, 'Error fetching request data'));
   }
 
+  getName() {
+    let playerName = this.state.searchValue;
+    let properName = '';
+    let splitName = playerName.split(' ');
+
+    for (let name of splitName) {
+      properName += name.charAt(0).toUpperCase() + name.substring(1) + ' ';
+    }
+
+    return properName;
+  }
+
   render() {
-    const { searchBar } = this.state;
+    const { searchBar, searchValue, arrestData } = this.state;
 
     return (
       <>
         {/* Header */}
-        {searchBar ? <h1 className="header">Here's the lowdown on </h1> : <h1 className="header">Ever wondered if you should support a player?</h1>}
+        {searchBar ? <h1 className="header">Ever wondered if you should support a player?</h1> : <h1 className="header">Can you trust {this.getName(searchValue)}?</h1>}
         
-        {/* Search Bar */}
-        {searchBar ? null : <SearchBar searchValue={this.state.searchValue} handleSubmit={this.handleSubmit} handleChange={this.handleChange} />}
+        <SearchBar searchBar={searchBar} searchValue={searchValue} handleSubmit={this.handleSubmit} handleChange={this.handleChange} />
         
-        {/* Rap Sheet */}
-        {searchBar ? <RapSheet crimes={this.state.arrestData} /> : null}
+        <SupportDecision searchBar={searchBar} crimes={arrestData} />
 
-        {searchBar ? <SupportDecision crimes={this.state.arrestData} /> : null}
+        <RapSheet searchBar={searchBar} crimes={arrestData} />
+
+        <Footer searchBar={searchBar} handleClick={this.handleClick} />
       </>
     );
   }
