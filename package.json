@@ -1,0 +1,30 @@
+{
+  "name": "nfl-bad-boys",
+  "version": "1.0.0",
+  "description": "The most up-to-date collection of NFL players' crime history",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon server/server.js",
+    "build": "parcel build client/src/index.js client/src/index.html client/src/styles.css -d client/dist --no-source-maps",
+    "dev": "parcel client/src/index.js client/src/index.html client/src/styles.css -d client/dist --no-source-maps"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JacksonCohen/nfl-bad-boys.git"
+  },
+  "author": "JRC",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JacksonCohen/nfl-bad-boys/issues"
+  },
+  "homepage": "https://github.com/JacksonCohen/nfl-bad-boys#readme",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "express": "^4.16.4",
+    "parcel-bundler": "^1.12.3",
+    "react": "^16.8.6"
+  },
+  "devDependencies": {
+    "morgan": "^1.9.1"
+  }
+}
