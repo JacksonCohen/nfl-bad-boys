@@ -2253,7 +2253,109 @@ if ("development" === 'production') {
 } else {
   module.exports = require('./cjs/react.development.js');
 }
-},{"./cjs/react.development.js":"../../node_modules/react/cjs/react.development.js"}],"../../node_modules/axios/lib/helpers/bind.js":[function(require,module,exports) {
+},{"./cjs/react.development.js":"../../node_modules/react/cjs/react.development.js"}],"components/SearchBar.jsx":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireDefault(require("react"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var SearchBar = function SearchBar(props) {
+  return _react.default.createElement(_react.default.Fragment, null, _react.default.createElement("form", {
+    className: "search-bar",
+    onSubmit: props.handleSubmit
+  }, _react.default.createElement("input", {
+    type: "text",
+    placeholder: "SEARCH FOR A PLAYER e.g. Kenny Britt",
+    value: props.searchValue,
+    onChange: props.handleChange
+  })));
+};
+
+var _default = SearchBar;
+exports.default = _default;
+},{"react":"../../node_modules/react/index.js"}],"components/RapSheet.jsx":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireWildcard(require("react"));
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
+
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+var RapSheet =
+/*#__PURE__*/
+function (_Component) {
+  _inherits(RapSheet, _Component);
+
+  function RapSheet(props) {
+    var _this;
+
+    _classCallCheck(this, RapSheet);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(RapSheet).call(this, props));
+    _this.state = {
+      crimeDescription: false
+    };
+    _this.handleClick = _this.handleClick.bind(_assertThisInitialized(_this));
+    return _this;
+  }
+
+  _createClass(RapSheet, [{
+    key: "handleClick",
+    value: function handleClick() {
+      this.setState({
+        crimeDescription: !this.state.crimeDescription
+      });
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this2 = this;
+
+      return _react.default.createElement(_react.default.Fragment, null, _react.default.createElement("ul", null, this.props.crimes && this.props.crimes.map(function (crime) {
+        return _react.default.createElement("li", {
+          key: crime.arrest_stats_id,
+          onClick: _this2.handleClick
+        }, crime.Category, _react.default.createElement("div", {
+          className: "crime-info".concat(crime.arrest_stats_id)
+        }, " - ".concat(crime.Description)));
+      })));
+    }
+  }]);
+
+  return RapSheet;
+}(_react.Component);
+
+var _default = RapSheet;
+exports.default = _default;
+},{"react":"../../node_modules/react/index.js"}],"../../node_modules/axios/lib/helpers/bind.js":[function(require,module,exports) {
 'use strict';
 
 module.exports = function bind(fn, thisArg) {
@@ -3898,7 +4000,35 @@ module.exports.default = axios;
 
 },{"./utils":"../../node_modules/axios/lib/utils.js","./helpers/bind":"../../node_modules/axios/lib/helpers/bind.js","./core/Axios":"../../node_modules/axios/lib/core/Axios.js","./defaults":"../../node_modules/axios/lib/defaults.js","./cancel/Cancel":"../../node_modules/axios/lib/cancel/Cancel.js","./cancel/CancelToken":"../../node_modules/axios/lib/cancel/CancelToken.js","./cancel/isCancel":"../../node_modules/axios/lib/cancel/isCancel.js","./helpers/spread":"../../node_modules/axios/lib/helpers/spread.js"}],"../../node_modules/axios/index.js":[function(require,module,exports) {
 module.exports = require('./lib/axios');
-},{"./lib/axios":"../../node_modules/axios/lib/axios.js"}],"components/App.jsx":[function(require,module,exports) {
+},{"./lib/axios":"../../node_modules/axios/lib/axios.js"}],"components/SupportDecision.jsx":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireDefault(require("react"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var SupportDecision = function SupportDecision(props) {
+  return _react.default.createElement(_react.default.Fragment, null, props.crimes.length ? _react.default.createElement("center", {
+    className: "verdict",
+    style: {
+      color: "red"
+    }
+  }, "NO") : _react.default.createElement("center", {
+    className: "verdict",
+    style: {
+      color: "green"
+    }
+  }, "YES"));
+};
+
+var _default = SupportDecision;
+exports.default = _default;
+},{"react":"../../node_modules/react/index.js"}],"components/App.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -3908,7 +4038,13 @@ exports.default = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
+var _SearchBar = _interopRequireDefault(require("./SearchBar"));
+
+var _RapSheet = _interopRequireDefault(require("./RapSheet"));
+
 var _axios = _interopRequireDefault(require("axios"));
+
+var _SupportDecision = _interopRequireDefault(require("./SupportDecision"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -3944,6 +4080,8 @@ function (_Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(App).call(this, props));
     _this.state = {
+      arrestData: [],
+      searchBar: false,
       searchValue: ''
     };
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
@@ -3959,6 +4097,9 @@ function (_Component) {
     value: function handleSubmit(e) {
       e.preventDefault();
       var input = this.state.searchValue;
+      this.setState({
+        searchBar: true
+      });
       this.getArrests(input);
     }
   }, {
@@ -3985,14 +4126,20 @@ function (_Component) {
   }, {
     key: "render",
     value: function render() {
-      return _react.default.createElement(_react.default.Fragment, null, _react.default.createElement("h1", null, "Ever wondered if you should support a player?"), _react.default.createElement("form", {
-        onSubmit: this.handleSubmit
-      }, _react.default.createElement("input", {
-        type: "text",
-        placeholder: "SEARCH FOR A PLAYER e.g. Kenny Britt",
-        value: this.state.searchValue,
-        onChange: this.handleChange
-      })));
+      var searchBar = this.state.searchBar;
+      return _react.default.createElement(_react.default.Fragment, null, searchBar ? _react.default.createElement("h1", {
+        className: "header"
+      }, "Here's the lowdown on ") : _react.default.createElement("h1", {
+        className: "header"
+      }, "Ever wondered if you should support a player?"), searchBar ? null : _react.default.createElement(_SearchBar.default, {
+        searchValue: this.state.searchValue,
+        handleSubmit: this.handleSubmit,
+        handleChange: this.handleChange
+      }), searchBar ? _react.default.createElement(_RapSheet.default, {
+        crimes: this.state.arrestData
+      }) : null, searchBar ? _react.default.createElement(_SupportDecision.default, {
+        crimes: this.state.arrestData
+      }) : null);
     }
   }]);
 
@@ -4001,7 +4148,7 @@ function (_Component) {
 
 var _default = App;
 exports.default = _default;
-},{"react":"../../node_modules/react/index.js","axios":"../../node_modules/axios/index.js"}],"../../../../../../node_modules/object-assign/index.js":[function(require,module,exports) {
+},{"react":"../../node_modules/react/index.js","./SearchBar":"components/SearchBar.jsx","./RapSheet":"components/RapSheet.jsx","axios":"../../node_modules/axios/index.js","./SupportDecision":"components/SupportDecision.jsx"}],"../../../../../../node_modules/object-assign/index.js":[function(require,module,exports) {
 /*
 object-assign
 (c) Sindre Sorhus
@@ -29672,7 +29819,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56620" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50326" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

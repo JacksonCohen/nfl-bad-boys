@@ -1,11 +1,16 @@
 import React, { Component } from 'react';
+import SearchBar from './SearchBar';
+import RapSheet from './RapSheet';
 import axios from 'axios';
+import SupportDecision from './SupportDecision';
 
 class App extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
+      arrestData: [],
+      searchBar: false,
       searchValue: ''
     };
 
@@ -21,6 +26,7 @@ class App extends Component {
     e.preventDefault();
 
     let input = this.state.searchValue;
+    this.setState({ searchBar: true });
     this.getArrests(input);
   }
 
@@ -37,12 +43,20 @@ class App extends Component {
   }
 
   render() {
+    const { searchBar } = this.state;
+
     return (
       <>
-        <h1>Ever wondered if you should support a player?</h1>
-        <form onSubmit={this.handleSubmit}>
-          <input type="text" placeholder="SEARCH FOR A PLAYER e.g. Kenny Britt" value={this.state.searchValue} onChange={this.handleChange} />
-        </form>
+        {/* Header */}
+        {searchBar ? <h1 className="header">Here's the lowdown on </h1> : <h1 className="header">Ever wondered if you should support a player?</h1>}
+        
+        {/* Search Bar */}
+        {searchBar ? null : <SearchBar searchValue={this.state.searchValue} handleSubmit={this.handleSubmit} handleChange={this.handleChange} />}
+        
+        {/* Rap Sheet */}
+        {searchBar ? <RapSheet crimes={this.state.arrestData} /> : null}
+
+        {searchBar ? <SupportDecision crimes={this.state.arrestData} /> : null}
       </>
     );
   }
