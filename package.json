@@ -4,6 +4,7 @@
   "description": "The most up-to-date collection of NFL players' crime history",
   "main": "index.js",
   "engines": {
+    "npm": "6.4.1",
     "node": "10.14.2"
   },
   "scripts": {
