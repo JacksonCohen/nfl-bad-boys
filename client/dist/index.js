@@ -7209,7 +7209,11 @@ function (_Component) {
 
       _axios.default.get('/players').then(function (_ref2) {
         var players = _ref2.data;
-
+        var playerNames = players.map(function (player) {
+          return player.name;
+        });
+        return playerNames;
+      }).then(function (players) {
         _this4.setState({
           players: players
         });

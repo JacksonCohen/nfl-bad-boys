@@ -53,6 +53,10 @@ class App extends Component {
   getPlayers() {
     axios.get('/players')
       .then(({ data: players }) => {
+        let playerNames = players.map(player => player.name);
+        return playerNames;
+      })
+      .then(players => {
         this.setState({
           players: players
         });

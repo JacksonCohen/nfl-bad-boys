@@ -3,7 +3,8 @@ const path = require('path');
 const morgan = require('morgan');
 const app = express();
 const port = 4000 || process.env.PORT
-const { getPlayerArrestData, getAllPlayers } = require('./helpers.js');
+const { getPlayerArrestData } = require('./helpers.js');
+const { getPlayersFromDatabase } = require('../database/helpers.js');
 
 app.use(express.static(path.join(__dirname, '../client/dist/')));
 app.use(morgan('dev'));
@@ -15,15 +16,13 @@ app.get('/arrests/:player', (req, res) => {
 });
 
 app.get('/players', (req, res) => {
-  getAllPlayers()
-    .then(({data: players}) => {
-      let playerNames = [];
-      for (let player of players) {
-        playerNames.push(`${player.FirstName} ${player.LastName}`);
-      }
-      res.send(playerNames);
-    })
-    .catch(err => console.error(err, 'Error sending player data from server'));
+  getPlayersFromDatabase((err, data) => {
+    if (err) {
+      console.error(err, 'Error getting players from database');
+    } else {
+      res.send(data)
+    }
+  })
 });
 
 app.listen(port, () => {
