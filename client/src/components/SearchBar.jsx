@@ -54,7 +54,7 @@ class SearchBar extends Component {
 
   render() {
     const { value, suggestions } = this.state;
-    const { searchBar, searchValue, handleSubmit, handleChange } = this.props;
+    const { searchBar, handleSubmit, handleChange } = this.props;
     const inputProps = {
       placeholder: "SEARCH FOR A PLAYER e.g. Kenny Britt",
       value,
@@ -64,7 +64,7 @@ class SearchBar extends Component {
     return (
       <>
         {searchBar ? (
-          <form className="search-bar" onSubmit={handleSubmit} value={searchValue} onChange={handleChange}>
+          <form className="search-bar" onSubmit={handleSubmit} onChange={handleChange}>
             <Autosuggest
               suggestions={suggestions}
               onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}

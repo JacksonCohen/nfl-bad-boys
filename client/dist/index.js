@@ -5221,7 +5221,6 @@ function (_Component) {
           suggestions = _this$state.suggestions;
       var _this$props = this.props,
           searchBar = _this$props.searchBar,
-          searchValue = _this$props.searchValue,
           handleSubmit = _this$props.handleSubmit,
           handleChange = _this$props.handleChange;
       var inputProps = {
@@ -5232,7 +5231,6 @@ function (_Component) {
       return _react.default.createElement(_react.default.Fragment, null, searchBar ? _react.default.createElement("form", {
         className: "search-bar",
         onSubmit: handleSubmit,
-        value: searchValue,
         onChange: handleChange
       }, _react.default.createElement(_reactAutosuggest.default, {
         suggestions: suggestions,
@@ -7144,13 +7142,10 @@ function (_Component) {
     _this.state = {
       arrestData: [],
       searchBar: true,
-      searchValue: '',
       searchedPlayer: ''
     };
-    _this.getName = _this.getName.bind(_assertThisInitialized(_this));
     _this.handleClick = _this.handleClick.bind(_assertThisInitialized(_this));
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
-    _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -7165,20 +7160,13 @@ function (_Component) {
       var _this2 = this;
 
       e.preventDefault();
-      var input = this.state.searchValue;
+      var searchBar = this.state.searchBar;
+      var input = document.getElementsByClassName('react-autosuggest__input react-autosuggest__input--focused')[0].value;
       this.getArrests(input, function () {
         _this2.setState({
-          searchBar: !_this2.state.searchBar,
-          searchedPlayer: _this2.state.searchValue,
-          searchValue: ''
+          searchBar: !searchBar,
+          searchedPlayer: input
         });
-      });
-    }
-  }, {
-    key: "handleChange",
-    value: function handleChange(e) {
-      this.setState({
-        searchValue: e.target.value
       });
     }
   }, {
@@ -7198,9 +7186,7 @@ function (_Component) {
         var data = _ref.data;
         return _this3.setState({
           arrestData: data
-        }, function () {
-          callback();
-        });
+        }, callback());
       }).catch(function (err) {
         return console.error(err, 'Error fetching request data');
       });
@@ -7246,55 +7232,20 @@ function (_Component) {
       });
     }
   }, {
-    key: "getName",
-    value: function getName() {
-      var playerName = this.state.searchedPlayer;
-      var splitName = playerName.split(' ');
-      var properName = '';
-      var _iteratorNormalCompletion2 = true;
-      var _didIteratorError2 = false;
-      var _iteratorError2 = undefined;
-
-      try {
-        for (var _iterator2 = splitName[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
-          var name = _step2.value;
-          properName += name.charAt(0).toUpperCase() + name.substring(1) + ' ';
-        }
-      } catch (err) {
-        _didIteratorError2 = true;
-        _iteratorError2 = err;
-      } finally {
-        try {
-          if (!_iteratorNormalCompletion2 && _iterator2.return != null) {
-            _iterator2.return();
-          }
-        } finally {
-          if (_didIteratorError2) {
-            throw _iteratorError2;
-          }
-        }
-      }
-
-      return properName.slice(0, -1);
-    }
-  }, {
     key: "render",
     value: function render() {
       var _this$state = this.state,
           searchBar = _this$state.searchBar,
-          searchValue = _this$state.searchValue,
           arrestData = _this$state.arrestData,
           searchedPlayer = _this$state.searchedPlayer,
           players = _this$state.players;
       return _react.default.createElement(_react.default.Fragment, null, _react.default.createElement(_Header.default, {
         searchBar: searchBar,
         searchedPlayer: searchedPlayer,
-        player: this.getName(searchedPlayer)
+        player: searchedPlayer
       }), _react.default.createElement(_SearchBar.default, {
         searchBar: searchBar,
-        searchValue: searchValue,
         handleSubmit: this.handleSubmit,
-        handleChange: this.handleChange,
         players: players
       }), _react.default.createElement(_Verdict.default, {
         searchBar: searchBar,

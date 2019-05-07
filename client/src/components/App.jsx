@@ -13,14 +13,11 @@ class App extends Component {
     this.state = {
       arrestData: [],
       searchBar: true,
-      searchValue: '',
       searchedPlayer: ''
     };
 
-    this.getName = this.getName.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleChange = this.handleChange.bind(this);
   }
 
   componentDidMount() {
@@ -29,21 +26,14 @@ class App extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-
-    let input = this.state.searchValue;
+    let { searchBar } = this.state;
+    let input = document.getElementsByClassName('react-autosuggest__input react-autosuggest__input--focused')[0].value
 
     this.getArrests(input, () => { 
       this.setState({ 
-        searchBar: !this.state.searchBar,
-        searchedPlayer: this.state.searchValue,
-        searchValue: ''
+        searchBar: !searchBar,
+        searchedPlayer: input
       });
-    });
-  }
-
-  handleChange(e) {
-    this.setState({ 
-      searchValue: e.target.value 
     });
   }
 
@@ -56,7 +46,7 @@ class App extends Component {
 
   getArrests(player, callback) {
     axios.get(`/arrests/${player}`)
-      .then(({ data }) => this.setState({ arrestData: data }, () => { callback() }))
+      .then(({ data }) => this.setState({ arrestData: data }, callback()))
       .catch(err => console.error(err, 'Error fetching request data'));
   }
 
@@ -75,25 +65,14 @@ class App extends Component {
       .catch(err => console.error(err, 'Error fetching player data'));
   }
 
-  getName() {
-    const playerName = this.state.searchedPlayer;
-    const splitName = playerName.split(' ');
-    let properName = '';
-
-    for (let name of splitName) {
-      properName += name.charAt(0).toUpperCase() + name.substring(1) + ' ';
-    }
-    return properName.slice(0, -1);
-  }
-
   render() {
-    const { searchBar, searchValue, arrestData, searchedPlayer, players } = this.state;
+    const { searchBar, arrestData, searchedPlayer, players } = this.state;
 
     return (
       <>
-        <Header searchBar={searchBar} searchedPlayer={searchedPlayer} player={this.getName(searchedPlayer)} />
+        <Header searchBar={searchBar} searchedPlayer={searchedPlayer} player={searchedPlayer} />
         
-        <SearchBar searchBar={searchBar} searchValue={searchValue} handleSubmit={this.handleSubmit} handleChange={this.handleChange} players={players} />
+        <SearchBar searchBar={searchBar} handleSubmit={this.handleSubmit} players={players} />
         
         <Verdict searchBar={searchBar} crimes={arrestData} />
 

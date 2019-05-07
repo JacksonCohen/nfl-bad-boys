@@ -14,7 +14,7 @@ app.get('/arrests/:player', (req, res) => {
     .catch(err => console.error(err, 'Error sending arrest data from server'));
 });
 
-app.get('/players' , (req, res) => {
+app.get('/players', (req, res) => {
   getAllPlayers()
     .then(({data: players}) => res.send(players))
     .catch(err => console.error(err, 'Error sending player data from server'));

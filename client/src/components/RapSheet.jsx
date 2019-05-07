@@ -31,7 +31,7 @@ class RapSheet extends Component {
 
   render() {
     const { searchBar, crimes } = this.props;
-    
+
     return (
       <>
         {searchBar ? null : (

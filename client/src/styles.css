@@ -1,10 +1,6 @@
-input {
-  width: 400px;
-}
-
 .crime-info {
-  /* display: none; */
-  font-family: Vikings;
+  font-family: 'Times', serif;
+  font-weight: 900;
   font-size: 18px;
 }
 
@@ -23,29 +19,6 @@ input {
   transform: translate(-50%, -50%);
 }
 
-.input-bar {
-  font-family: Freshman;
-  font-size: 15px;
-  height: 40px;
-  padding: 0 15px;
-  border-radius: 5px;
-  border: 1px solid rgba(136, 129, 129, 0.562);
-
-}
-
-.input-bar:focus {
-  outline: none;
-  border: 1px solid #013369;
-}
-
-.input-bar::placeholder {
-  color: #013369;
-  position: relative;
-  font-family: Freshman;
-  font-size: 15px;
-  top: 2px;
-}
-
 .header, .footer {
   color: #013369;
   font-family: Freshman;
@@ -62,20 +35,12 @@ input {
   src: url("/fonts/Freshman.ttf");
 }
 
-@font-face {
-  font-family: "Vikings";
-  src: url("/fonts/Vikings.ttf");
-}
-
-body {
-  font-family: Helvetica, sans-serif;
-}
-
 .react-autosuggest__container {
   position: relative;
 }
 
 .react-autosuggest__input {
+  width: 400px;
   height: 40px;
   padding: 0 15px;
   font-family: Freshman;
