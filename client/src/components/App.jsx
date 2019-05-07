@@ -27,7 +27,7 @@ class App extends Component {
   handleSubmit(e) {
     e.preventDefault();
     let { searchBar } = this.state;
-    let input = document.getElementsByClassName('react-autosuggest__input react-autosuggest__input--focused')[0].value
+    let input = document.getElementsByClassName('react-autosuggest__input')[0].value
 
     this.getArrests(input, () => { 
       this.setState({ 
@@ -51,15 +51,10 @@ class App extends Component {
   }
 
   getPlayers() {
-    let playerNames = [];
-
     axios.get('/players')
       .then(({ data: players }) => {
-        for (let player of players) {
-          playerNames.push(`${player.FirstName} ${player.LastName}`);
-        }
         this.setState({
-          players: playerNames
+          players: players
         })
       })
       .catch(err => console.error(err, 'Error fetching player data'));

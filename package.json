@@ -23,7 +23,8 @@
     "express": "^4.16.4",
     "parcel-bundler": "^1.12.3",
     "react": "^16.8.6",
-    "react-autosuggest": "^9.4.3"
+    "react-autosuggest": "^9.4.3",
+    "sqlite3": "^4.0.6"
   },
   "devDependencies": {
     "morgan": "^1.9.1"

@@ -5177,8 +5177,8 @@ function (_Component) {
       var inputLength = inputValue.length;
       var suggestions = inputLength === 0 ? [] : this.props.players.filter(function (player) {
         return player.toLowerCase().slice(0, inputLength) === inputValue;
-      });
-      return suggestions.slice(0, 8);
+      }).slice(0, 8);
+      return suggestions;
     }
   }, {
     key: "onSuggestionsFetchRequested",
@@ -7161,7 +7161,7 @@ function (_Component) {
 
       e.preventDefault();
       var searchBar = this.state.searchBar;
-      var input = document.getElementsByClassName('react-autosuggest__input react-autosuggest__input--focused')[0].value;
+      var input = document.getElementsByClassName('react-autosuggest__input')[0].value;
       this.getArrests(input, function () {
         _this2.setState({
           searchBar: !searchBar,
@@ -7196,36 +7196,11 @@ function (_Component) {
     value: function getPlayers() {
       var _this4 = this;
 
-      var playerNames = [];
-
       _axios.default.get('/players').then(function (_ref2) {
         var players = _ref2.data;
-        var _iteratorNormalCompletion = true;
-        var _didIteratorError = false;
-        var _iteratorError = undefined;
-
-        try {
-          for (var _iterator = players[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-            var player = _step.value;
-            playerNames.push("".concat(player.FirstName, " ").concat(player.LastName));
-          }
-        } catch (err) {
-          _didIteratorError = true;
-          _iteratorError = err;
-        } finally {
-          try {
-            if (!_iteratorNormalCompletion && _iterator.return != null) {
-              _iterator.return();
-            }
-          } finally {
-            if (_didIteratorError) {
-              throw _iteratorError;
-            }
-          }
-        }
 
         _this4.setState({
-          players: playerNames
+          players: players
         });
       }).catch(function (err) {
         return console.error(err, 'Error fetching player data');
@@ -32936,7 +32911,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54373" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58981" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

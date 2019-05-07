@@ -16,7 +16,13 @@ app.get('/arrests/:player', (req, res) => {
 
 app.get('/players', (req, res) => {
   getAllPlayers()
-    .then(({data: players}) => res.send(players))
+    .then(({data: players}) => {
+      let playerNames = [];
+      for (let player of players) {
+        playerNames.push(`${player.FirstName} ${player.LastName}`);
+      }
+      res.send(playerNames);
+    })
     .catch(err => console.error(err, 'Error sending player data from server'));
 });
 

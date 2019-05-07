@@ -21,9 +21,9 @@ class SearchBar extends Component {
     const inputValue = value.trim().toLowerCase();
     const inputLength = inputValue.length;
     const suggestions = inputLength === 0 ? [] : this.props.players.filter(
-      player => player.toLowerCase().slice(0, inputLength) === inputValue);
+      player => player.toLowerCase().slice(0, inputLength) === inputValue).slice(0, 8);
 
-    return suggestions.slice(0, 8);
+    return suggestions;
   }
 
   onSuggestionsFetchRequested({ value }) {
