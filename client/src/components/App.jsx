@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import SupportDecision from './SupportDecision';
 import SearchBar from './SearchBar';
 import RapSheet from './RapSheet';
+import Verdict from './Verdict';
+import Header from './Header';
 import Footer from './Footer';
 import axios from 'axios';
 
@@ -12,7 +13,8 @@ class App extends Component {
     this.state = {
       arrestData: [],
       searchBar: true,
-      searchValue: ''
+      searchValue: '',
+      searchedPlayer: ''
     };
 
     this.getName = this.getName.bind(this);
@@ -22,18 +24,21 @@ class App extends Component {
   }
 
   componentDidMount() {
-  
+    this.getPlayers();
   }
 
   handleSubmit(e) {
     e.preventDefault();
 
     let input = this.state.searchValue;
-    this.setState({ 
-      searchBar: !this.state.searchBar,
-      searchValue: ''
+
+    this.getArrests(input, () => { 
+      this.setState({ 
+        searchBar: !this.state.searchBar,
+        searchedPlayer: this.state.searchValue,
+        searchValue: ''
+      });
     });
-    this.getArrests(input);
   }
 
   handleChange(e) {
@@ -49,35 +54,48 @@ class App extends Component {
     });
   }
 
-  getArrests(player) {
+  getArrests(player, callback) {
     axios.get(`/arrests/${player}`)
-      .then(({ data }) => this.setState({ arrestData: data }))
+      .then(({ data }) => this.setState({ arrestData: data }, () => { callback() }))
       .catch(err => console.error(err, 'Error fetching request data'));
   }
 
+  getPlayers() {
+    let playerNames = [];
+
+    axios.get('/players')
+      .then(({ data: players }) => {
+        for (let player of players) {
+          playerNames.push(`${player.FirstName} ${player.LastName}`);
+        }
+        this.setState({
+          players: playerNames
+        })
+      })
+      .catch(err => console.error(err, 'Error fetching player data'));
+  }
+
   getName() {
-    let playerName = this.state.searchValue;
+    const playerName = this.state.searchedPlayer;
+    const splitName = playerName.split(' ');
     let properName = '';
-    let splitName = playerName.split(' ');
 
     for (let name of splitName) {
       properName += name.charAt(0).toUpperCase() + name.substring(1) + ' ';
     }
-
-    return properName;
+    return properName.slice(0, -1);
   }
 
   render() {
-    const { searchBar, searchValue, arrestData } = this.state;
+    const { searchBar, searchValue, arrestData, searchedPlayer, players } = this.state;
 
     return (
       <>
-        {/* Header */}
-        {searchBar ? <h1 className="header">Ever wondered if you should support a player?</h1> : <h1 className="header">Can you trust {this.getName(searchValue)}?</h1>}
+        <Header searchBar={searchBar} searchedPlayer={searchedPlayer} player={this.getName(searchedPlayer)} />
         
-        <SearchBar searchBar={searchBar} searchValue={searchValue} handleSubmit={this.handleSubmit} handleChange={this.handleChange} />
+        <SearchBar searchBar={searchBar} searchValue={searchValue} handleSubmit={this.handleSubmit} handleChange={this.handleChange} players={players} />
         
-        <SupportDecision searchBar={searchBar} crimes={arrestData} />
+        <Verdict searchBar={searchBar} crimes={arrestData} />
 
         <RapSheet searchBar={searchBar} crimes={arrestData} />
 

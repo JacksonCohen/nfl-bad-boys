@@ -3,13 +3,16 @@ input {
 }
 
 .crime-info {
-  display: none;
+  /* display: none; */
+  font-family: Vikings;
+  font-size: 18px;
 }
 
 .verdict {
   font-family: Freshman;
   position: relative;
   font-size: 300px;
+  top: 14px;
 }
 
 .search-bar {
@@ -21,6 +24,8 @@ input {
 }
 
 .input-bar {
+  font-family: Freshman;
+  font-size: 15px;
   height: 40px;
   padding: 0 15px;
   border-radius: 5px;
@@ -28,12 +33,13 @@ input {
 
 }
 
-input.input-bar:focus {
+.input-bar:focus {
   outline: none;
   border: 1px solid #013369;
 }
 
-input.input-bar::placeholder {
+.input-bar::placeholder {
+  color: #013369;
   position: relative;
   font-family: Freshman;
   font-size: 15px;
@@ -41,12 +47,92 @@ input.input-bar::placeholder {
 }
 
 .header, .footer {
+  color: #013369;
   font-family: Freshman;
   position: relative;
   text-align: center;
 }
 
+.footer {
+  text-decoration: underline;
+}
+
 @font-face {
   font-family: "Freshman";
   src: url("/Freshman.44fc4fa6.ttf");
+}
+
+@font-face {
+  font-family: "Vikings";
+  src: url("/Vikings.ef8d11a5.ttf");
+}
+
+body {
+  font-family: Helvetica, sans-serif;
+}
+
+.react-autosuggest__container {
+  position: relative;
+}
+
+.react-autosuggest__input {
+  height: 40px;
+  padding: 0 15px;
+  font-family: Freshman;
+  font-size: 15px;
+  color: #013369; 
+  border: 1px solid rgba(136, 129, 129, 0.562);
+  border-radius: 4px;
+}
+
+.react-autosuggest__input::placeholder {
+    color: #013369;
+}
+
+.react-autosuggest__input--focused {
+  outline: none;
+  border: 1px solid #013369;
+}
+
+.react-autosuggest__input--open {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.react-autosuggest__suggestions-container {
+  display: none;
+}
+
+.react-autosuggest__suggestions-container {
+  display: none;
+}
+
+.react-autosuggest__suggestions-container--open {
+  display: block;
+  position: absolute;
+  top: 51px;
+  width: 430px;
+  color: #013369;
+  border: 1px solid #aaa;
+  background-color: #fff;
+  font-family: Freshman;
+  font-size: 15px;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+  z-index: 2;
+}
+
+.react-autosuggest__suggestions-list {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+.react-autosuggest__suggestion {
+  cursor: pointer;
+  padding: 10px 15px;
+}
+
+.react-autosuggest__suggestion--highlighted {
+  background-color: #ddd;
 }

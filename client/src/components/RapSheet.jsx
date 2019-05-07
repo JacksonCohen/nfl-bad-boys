@@ -11,27 +11,50 @@ class RapSheet extends Component {
     this.handleClick = this.handleClick.bind(this);
   }
 
-  handleClick() {
+  componentDidMount() {
+    this.monitorCrimes(this.props.crimes);
+  }
+
+  handleClick(crime) {
     this.setState({
-      crimeDescription: !this.state.crimeDescription
+      [crime]: !this.state.crime
     });
   }
 
+  monitorCrimes(crimes) {
+    for (let crime of crimes) {
+      this.setState({
+        [crime.arrest_stats_id]: false
+      });
+    }
+  }
+
   render() {
+    const { searchBar, crimes } = this.props;
+    
     return (
       <>
-        {this.props.searchBar ? null : 
-        <ul>
-          {this.props.crimes &&
-            this.props.crimes.map(crime => {
-              return (
-                <li key={crime.arrest_stats_id} onClick={this.handleClick}>
-                  {crime.Category}
-                  <div className={`crime-info${crime.arrest_stats_id}`} >{` - ${crime.Description}`}</div>
-                </li>
-              );
-            })}
-        </ul>}
+        {searchBar ? null : (
+          <ul>
+            {crimes &&
+              crimes.map((crime, i) => {
+                return (
+                  <li
+                    className={`crime-info`}
+                    key={crime.arrest_stats_id}
+                    onClick={() => this.handleClick(crime.arrest_stats_id)}
+                  >
+                    {crime.Category}
+                    {this.state[crime.arrest_stats_id] ? (
+                      <div className={`crime-info${i}`}>{` - ${
+                        crime.Description
+                      }`}</div>
+                    ) : null}
+                  </li>
+                );
+              })}
+          </ul>
+        )}
       </>
     );
   }
