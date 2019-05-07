@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "The most up-to-date collection of NFL players' crime history",
   "main": "index.js",
+  "engines": {
+    "node": "10.14.2"
+  },
   "scripts": {
     "start": "nodemon server/server.js",
     "build": "parcel build client/src/index.js client/src/index.html client/src/styles.css -d client/dist --no-source-maps",
