@@ -2,7 +2,7 @@ const express = require('express');
 const path = require('path');
 const morgan = require('morgan');
 const app = express();
-const port = 4000 || process.env.PORT
+const port = process.env.PORT || 4000;
 const { getPlayerArrestData } = require('./helpers.js');
 const { getPlayersFromDatabase } = require('../database/helpers.js');
 
