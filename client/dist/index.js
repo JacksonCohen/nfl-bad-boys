@@ -5343,7 +5343,9 @@ function (_Component) {
       var _this$props = this.props,
           searchBar = _this$props.searchBar,
           crimes = _this$props.crimes;
-      return _react.default.createElement(_react.default.Fragment, null, searchBar ? null : _react.default.createElement("ul", null, crimes && crimes.map(function (crime, i) {
+      return _react.default.createElement(_react.default.Fragment, null, searchBar ? null : _react.default.createElement("ol", {
+        className: "numbers"
+      }, crimes && crimes.map(function (crime, i) {
         return _react.default.createElement("li", {
           className: "crime-info",
           key: crime.arrest_stats_id,
@@ -5410,7 +5412,10 @@ var Header = function Header(props) {
   return _react.default.createElement(_react.default.Fragment, null, searchBar ? _react.default.createElement("h1", {
     className: "header"
   }, "NFL Arrests") : _react.default.createElement("h1", {
-    className: "header"
+    className: "header",
+    style: {
+      top: 0
+    }
   }, "Is ", player, " clean?"));
 };
 
@@ -5433,7 +5438,11 @@ var Footer = function Footer(props) {
       handleClick = props.handleClick;
   return _react.default.createElement(_react.default.Fragment, null, searchBar ? null : _react.default.createElement("h3", {
     className: "footer",
-    onClick: handleClick
+    onClick: function onClick() {
+      handleClick(function () {
+        document.getElementsByClassName("react-autosuggest__input")[0].value = "";
+      });
+    }
   }, "Check another player? Click here!"));
 };
 
@@ -7171,10 +7180,12 @@ function (_Component) {
     }
   }, {
     key: "handleClick",
-    value: function handleClick() {
+    value: function handleClick(callback) {
       this.setState({
         searchBar: !this.state.searchBar,
         arrestData: []
+      }, function () {
+        callback();
       });
     }
   }, {
@@ -32911,7 +32922,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58981" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56530" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

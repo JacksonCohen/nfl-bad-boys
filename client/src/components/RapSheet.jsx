@@ -35,12 +35,12 @@ class RapSheet extends Component {
     return (
       <>
         {searchBar ? null : (
-          <ul>
+          <ol className="numbers">
             {crimes &&
               crimes.map((crime, i) => {
                 return (
                   <li
-                    className={`crime-info`}
+                    className="crime-info"
                     key={crime.arrest_stats_id}
                     onClick={() => this.handleClick(crime.arrest_stats_id)}
                   >
@@ -53,7 +53,7 @@ class RapSheet extends Component {
                   </li>
                 );
               })}
-          </ul>
+          </ol>
         )}
       </>
     );

@@ -5,7 +5,7 @@ const Header = props => {
 
   return (
     <>
-      {searchBar ? <h1 className="header">NFL Arrests</h1> : <h1 className="header">Is {player} clean?</h1>}
+      {searchBar ? <h1 className="header">NFL Arrests</h1> : <h1 className="header" style={{top:0}}>Is {player} clean?</h1>}
     </>
   );
 }

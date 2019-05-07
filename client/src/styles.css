@@ -1,7 +1,15 @@
 .crime-info {
-  font-family: 'Times', serif;
-  font-weight: 900;
-  font-size: 18px;
+  font-family: 'Alegreya SC', serif;
+  font-weight: 600;
+  font-size: 24px;
+  position: relative;
+  text-align: center;
+
+}
+
+.numbers {
+  text-align: center;
+  list-style-position: inside;
 }
 
 .verdict {
@@ -17,6 +25,15 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+.header {
+  top: 150px;
+  font-size: 70px;
+}
+
+.footer {
+  font-size: 32px;
 }
 
 .header, .footer {

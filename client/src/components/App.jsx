@@ -37,11 +37,11 @@ class App extends Component {
     });
   }
 
-  handleClick() {
+  handleClick(callback) {
     this.setState({
       searchBar: !this.state.searchBar,
       arrestData: []
-    });
+    }, () => { callback(); });
   }
 
   getArrests(player, callback) {
@@ -55,7 +55,7 @@ class App extends Component {
       .then(({ data: players }) => {
         this.setState({
           players: players
-        })
+        });
       })
       .catch(err => console.error(err, 'Error fetching player data'));
   }
