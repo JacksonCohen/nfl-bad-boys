@@ -28921,6 +28921,18 @@ var Footer = function Footer(props) {
   var searchBar = props.searchBar,
       handleClick = props.handleClick,
       clearInput = props.clearInput;
+  var footer = document.getElementsByClassName("footer")[0];
+
+  if (footer) {
+    document.addEventListener("keyup", function (e) {
+      if (e.keyCode === 13) {
+        e.preventDefault();
+        footer.click();
+      }
+    });
+  }
+
+  ;
   return _react.default.createElement(_react.default.Fragment, null, searchBar ? null : _react.default.createElement("h3", {
     className: "footer",
     onClick: function onClick() {

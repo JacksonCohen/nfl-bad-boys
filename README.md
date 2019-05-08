@@ -1,5 +1,4 @@
 # nfl-bad-boys
-The most up-to-date collection of NFL players' crime history
 
 
 <img src="https://giant.gfycat.com/SpiffyImpressiveIrishwolfhound.gif" height="100%" width="100%">
