@@ -46,9 +46,9 @@ class RapSheet extends Component {
                   >
                     {crime.Category}
                     {this.state[crime.arrest_stats_id] ? (
-                      <div className={`crime-info${i}`}>{` - ${
-                        crime.Description
-                      }`}</div>
+                      <div className={`crime-info${i}`}>
+                        {` - ${crime.Description}`}
+                      </div>
                     ) : null}
                   </li>
                 );

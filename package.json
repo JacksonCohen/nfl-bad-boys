@@ -9,8 +9,8 @@
   "scripts": {
     "start": "nodemon server/server.js",
     "production": "node server/server.js",
-    "build": "parcel build client/src/index.js client/src/index.html client/src/styles.css -d client/dist --no-source-maps",
-    "dev": "parcel client/src/index.js client/src/index.html client/src/styles.css -d client/dist --no-source-maps"
+    "build": "parcel build client/src/index.js client/src/index.html client/src/styles.css -o bundle.js -d client/dist --no-source-maps",
+    "dev": "parcel client/src/index.js client/src/index.html client/src/styles.css -o bundle.js -d client/dist --no-source-maps"
   },
   "repository": {
     "type": "git",
@@ -29,10 +29,10 @@
     "react": "^16.8.6",
     "react-autosuggest": "^9.4.3",
     "react-dom": "^16.8.6",
-    "morgan": "^1.9.1",
-    "nodemon": "^1.19.0",
     "sqlite3": "^4.0.6"
   },
   "devDependencies": {
+    "morgan": "^1.9.1",
+    "nodemon": "^1.19.0"
   }
 }

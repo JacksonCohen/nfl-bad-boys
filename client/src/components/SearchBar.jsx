@@ -10,7 +10,6 @@ class SearchBar extends Component {
       suggestions: []
     };
 
-    this.onChange = this.onChange.bind(this);
     this.renderSuggestion = this.renderSuggestion.bind(this);
     this.getSuggestionValue = this.getSuggestionValue.bind(this);
     this.onSuggestionsClearRequested = this.onSuggestionsClearRequested.bind(this);
@@ -46,25 +45,19 @@ class SearchBar extends Component {
     return <div>{suggestion}</div>;
   } 
 
-  onChange(event, { newValue }) {
-    this.setState({
-      value: newValue
-    });
-  }
-
   render() {
-    const { value, suggestions } = this.state;
-    const { searchBar, handleSubmit, handleChange } = this.props;
+    const { suggestions } = this.state;
+    const { searchBar, handleSubmit, value, onChange } = this.props;
     const inputProps = {
       placeholder: "SEARCH FOR A PLAYER e.g. Kenny Britt",
       value,
-      onChange: this.onChange
+      onChange: onChange
     };
 
     return (
       <>
         {searchBar ? (
-          <form className="search-bar" onSubmit={handleSubmit} onChange={handleChange}>
+          <form className="search-bar" onSubmit={handleSubmit}>
             <Autosuggest
               suggestions={suggestions}
               onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}

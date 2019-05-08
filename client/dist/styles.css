@@ -4,7 +4,6 @@
   font-size: 24px;
   position: relative;
   text-align: center;
-
 }
 
 .numbers {
@@ -45,11 +44,7 @@
 
 .footer {
   text-decoration: underline;
-}
-
-@font-face {
-  font-family: "Freshman";
-  src: url("/Freshman.44fc4fa6.ttf");
+  cursor: pointer;
 }
 
 .react-autosuggest__container {
@@ -117,4 +112,9 @@
 
 .react-autosuggest__suggestion--highlighted {
   background-color: #ddd;
+}
+
+@font-face {
+  font-family: "Freshman";
+  src: url("/Freshman.44fc4fa6.ttf");
 }

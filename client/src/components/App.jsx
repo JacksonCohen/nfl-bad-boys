@@ -11,11 +11,14 @@ class App extends Component {
     super(props);
 
     this.state = {
+      value: '',
       arrestData: [],
       searchBar: true,
       searchedPlayer: ''
     };
 
+    this.onChange = this.onChange.bind(this);
+    this.clearInput = this.clearInput.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -41,7 +44,7 @@ class App extends Component {
     this.setState({
       searchBar: !this.state.searchBar,
       arrestData: []
-    }, () => { callback(); });
+    }, () => {callback()});
   }
 
   getArrests(player, callback) {
@@ -64,20 +67,30 @@ class App extends Component {
       .catch(err => console.error(err, 'Error fetching player data'));
   }
 
+  onChange(event, { newValue }) {
+    this.setState({
+      value: newValue
+    });
+  }
+
+  clearInput() {
+    this.setState({ value: '' });
+  }
+
   render() {
-    const { searchBar, arrestData, searchedPlayer, players } = this.state;
+    const { searchBar, arrestData, searchedPlayer, players, value } = this.state;
 
     return (
       <>
-        <Header searchBar={searchBar} searchedPlayer={searchedPlayer} player={searchedPlayer} />
+        <Header searchBar={searchBar} player={searchedPlayer} />
         
-        <SearchBar searchBar={searchBar} handleSubmit={this.handleSubmit} players={players} />
+        <SearchBar searchBar={searchBar} handleSubmit={this.handleSubmit} onChange={this.onChange} value={value} players={players} />
         
         <Verdict searchBar={searchBar} crimes={arrestData} />
 
         <RapSheet searchBar={searchBar} crimes={arrestData} />
 
-        <Footer searchBar={searchBar} handleClick={this.handleClick} />
+        <Footer searchBar={searchBar} clearInput={this.clearInput} handleClick={this.handleClick} />
       </>
     );
   }

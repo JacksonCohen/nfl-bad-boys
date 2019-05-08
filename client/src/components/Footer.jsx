@@ -1,16 +1,12 @@
 import React from "react";
 
 const Footer = props => {
-  const { searchBar, handleClick } = props;
+  const { searchBar, handleClick, clearInput } = props;
 
   return (
     <>
       {searchBar ? null : (
-        <h3 className="footer" onClick={() => { handleClick(() => {
-              document.getElementsByClassName("react-autosuggest__input")[0].value = "";
-            });
-          }}
-        >
+        <h3 className="footer" onClick={() => {handleClick(() => { clearInput() })}}>
           Check another player? Click here!
         </h3>
       )}
