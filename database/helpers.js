@@ -6,7 +6,7 @@ const getPlayersFromDatabase = (callback) => {
     if (err) {
       console.error(err);
     } else {
-      db.all(`SELECT players.name FROM players;`, [], (err, rows) => {  
+      db.all(`SELECT * FROM players;`, [], (err, rows) => {  
         if (err) {
           console.error('Error querying database for results', err);
         } else {

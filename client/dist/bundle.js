@@ -28895,7 +28895,7 @@ var Header = function Header(props) {
       player = props.player;
   return _react.default.createElement(_react.default.Fragment, null, searchBar ? _react.default.createElement("h1", {
     className: "header"
-  }, "NFL Arrests") : _react.default.createElement("h1", {
+  }, "NFL Bad Boys") : _react.default.createElement("h1", {
     className: "header",
     style: {
       top: 0
