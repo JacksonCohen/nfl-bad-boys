@@ -8,15 +8,14 @@ const Footer = props => {
   if (footer) {
     document.addEventListener("keyup", (e) => {
       if (e.keyCode === 13) {
-        e.preventDefault();
-        updateRedirect(() => { footer.click(); });
+        handleClick(() => { footer.click(); });
       }
-    })
+    });
   };
 
   return (
     <Fragment>
-      <Link to="/">
+      <Link to="/" style={{ textDecoration: "none" }}>
         <h3 className="footer" onClick={() => { handleClick(() => { clearInput(); }); }}>
           Check another player? Click here!
         </h3>

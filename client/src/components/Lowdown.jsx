@@ -5,14 +5,14 @@ import RapSheet from "./RapSheet";
 import LowdownHeader from "./LowdownHeader";
 
 const Lowdown = props => {
-  const { crimes, searchedPlayer, clearInput, handleClick, updateRedirect } = props;
+  const { crimes, searchedPlayer, clearInput, handleClick } = props;
 
   return (
     <Fragment>
       <LowdownHeader searchedPlayer={searchedPlayer} />
       <Verdict crimes={crimes} />
       <RapSheet crimes={crimes} />
-      <Footer clearInput={clearInput} handleClick={handleClick} updateRedirect={updateRedirect} />
+      <Footer clearInput={clearInput} handleClick={handleClick} />
     </Fragment>
   );
 }

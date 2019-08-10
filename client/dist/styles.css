@@ -121,6 +121,13 @@
   margin-right: auto;
 }
 
+.center-text {
+  text-align: center;
+  text-decoration: none !important;
+  font-family: Freshman;
+  color: #013369;
+}
+
 @font-face {
   font-family: "Freshman";
   src: url("/Freshman.44fc4fa6.ttf");

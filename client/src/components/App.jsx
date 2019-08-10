@@ -20,7 +20,6 @@ class App extends Component {
     this.clearInput = this.clearInput.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.updateRedirect = this.updateRedirect.bind(this);
   }
 
   componentDidMount() {
@@ -31,20 +30,22 @@ class App extends Component {
     e.preventDefault();
     let input = document.getElementsByClassName("react-autosuggest__input")[0].value;
 
-    this.getArrests(input, () => { 
-      this.setState({
-        searchedPlayer: input,
-        redirect: true
+    if (input) {
+      this.getArrests(input, () => { 
+        this.setState({
+          searchedPlayer: input,
+          redirect: true
+        });
       });
-    });
+    }
   }
 
   handleClick(callback) {
     this.setState({
-      arrestData: []
-    }, () => { 
-      this.updateRedirect(callback);
-    });
+      arrestData: [],
+      redirect: false
+    }, callback());
+    return <Redirect to="/" />;
   }
 
   getArrests(player, callback) {
@@ -75,11 +76,6 @@ class App extends Component {
 
   clearInput() {
     this.setState({ value: "" });
-  }
-
-  updateRedirect(callback) {
-    this.setState({ redirect: false }, () => { callback(); });
-    return <Redirect to="/" />;
   }
 
   render() {
