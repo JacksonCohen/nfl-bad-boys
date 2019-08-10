@@ -1,14 +1,15 @@
 import React, { Fragment } from "react";
 
 const Footer = props => {
-  const { searchBar, handleClick, clearInput } = props;
+  const { searchBar, handleClick, clearInput, updateRedirect } = props;
   const footer = document.getElementsByClassName("footer")[0];
 
   if (footer) {
     document.addEventListener("keyup", (e) => {
       if (e.keyCode === 13) {
-        e.preventDefault();
-        footer.click();
+        updateRedirect();
+        // e.preventDefault();
+        // footer.click();
       }
     })
   };

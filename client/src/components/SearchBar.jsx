@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from "react";
+import { Redirect} from "react-router-dom";
 import Autosuggest from "react-autosuggest";
 
 class SearchBar extends Component {
@@ -47,27 +48,29 @@ class SearchBar extends Component {
 
   render() {
     const { suggestions } = this.state;
-    const { searchBar, handleSubmit, value, onChange } = this.props;
+    const { handleSubmit, value, onChange, redirect } = this.props;
     const inputProps = {
-      placeholder: "SEARCH FOR A PLAYER e.g. Kenny Britt",
       value,
-      onChange: onChange
+      onChange,
+      placeholder: "SEARCH FOR A PLAYER e.g. Kenny Britt"
     };
+
+    if (redirect) {
+      return <Redirect to="/lowdown" />
+    }
 
     return (
       <Fragment>
-        {searchBar ? (
-          <form className="search-bar" onSubmit={handleSubmit}>
-            <Autosuggest
-              suggestions={suggestions}
-              onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
-              onSuggestionsClearRequested={this.onSuggestionsClearRequested}
-              getSuggestionValue={this.getSuggestionValue}
-              renderSuggestion={this.renderSuggestion}
-              inputProps={inputProps}
-            />
-          </form>
-        ) : null}
+        <form className="search-bar" onSubmit={handleSubmit}>
+          <Autosuggest
+            suggestions={suggestions}
+            onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
+            onSuggestionsClearRequested={this.onSuggestionsClearRequested}
+            getSuggestionValue={this.getSuggestionValue}
+            renderSuggestion={this.renderSuggestion}
+            inputProps={inputProps}
+          />
+        </form>
       </Fragment>
     );
   }

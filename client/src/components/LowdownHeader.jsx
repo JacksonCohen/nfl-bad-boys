@@ -1,9 +1,9 @@
 import React from 'react';
 
 const LowdownHeader = props => {
-  const { player } = props;
+  const { searchedPlayer } = props;
 
-  return <h1 className="header" style={{top:0}}>Is {player} clean?</h1>;
+  return <h1 className="header" style={{top:0}}>Is {searchedPlayer} clean?</h1>;
 }
 
 export default LowdownHeader;

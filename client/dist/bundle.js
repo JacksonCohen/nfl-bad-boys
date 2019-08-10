@@ -31599,6 +31599,8 @@ exports.default = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
+var _reactRouterDom = require("react-router-dom");
+
 var _reactAutosuggest = _interopRequireDefault(require("react-autosuggest"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -31685,16 +31687,23 @@ function (_Component) {
     value: function render() {
       var suggestions = this.state.suggestions;
       var _this$props = this.props,
-          searchBar = _this$props.searchBar,
           handleSubmit = _this$props.handleSubmit,
           value = _this$props.value,
-          onChange = _this$props.onChange;
+          onChange = _this$props.onChange,
+          redirect = _this$props.redirect;
       var inputProps = {
-        placeholder: "SEARCH FOR A PLAYER e.g. Kenny Britt",
         value: value,
-        onChange: onChange
+        onChange: onChange,
+        placeholder: "SEARCH FOR A PLAYER e.g. Kenny Britt"
       };
-      return _react.default.createElement(_react.Fragment, null, searchBar ? _react.default.createElement("form", {
+
+      if (redirect) {
+        return _react.default.createElement(_reactRouterDom.Redirect, {
+          to: "/lowdown"
+        });
+      }
+
+      return _react.default.createElement(_react.Fragment, null, _react.default.createElement("form", {
         className: "search-bar",
         onSubmit: handleSubmit
       }, _react.default.createElement(_reactAutosuggest.default, {
@@ -31704,7 +31713,7 @@ function (_Component) {
         getSuggestionValue: this.getSuggestionValue,
         renderSuggestion: this.renderSuggestion,
         inputProps: inputProps
-      })) : null);
+      })));
     }
   }]);
 
@@ -31713,7 +31722,7 @@ function (_Component) {
 
 var _default = SearchBar;
 exports.default = _default;
-},{"react":"../../node_modules/react/index.js","react-autosuggest":"../../node_modules/react-autosuggest/dist/index.js"}],"components/Landing.jsx":[function(require,module,exports) {
+},{"react":"../../node_modules/react/index.js","react-router-dom":"../../node_modules/react-router-dom/esm/react-router-dom.js","react-autosuggest":"../../node_modules/react-autosuggest/dist/index.js"}],"components/Landing.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -31736,8 +31745,10 @@ var Landing = function Landing(props) {
       value = props.value,
       players = props.players,
       handleSubmit = props.handleSubmit,
-      onChange = props.onChange;
+      onChange = props.onChange,
+      redirect = props.redirect;
   return _react.default.createElement(_react.Fragment, null, _react.default.createElement(_LandingHeader.default, null), _react.default.createElement(_SearchBar.default, {
+    redirect: redirect,
     searchBar: searchBar,
     value: value,
     players: players,
@@ -31763,14 +31774,15 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 var Footer = function Footer(props) {
   var searchBar = props.searchBar,
       handleClick = props.handleClick,
-      clearInput = props.clearInput;
+      clearInput = props.clearInput,
+      updateRedirect = props.updateRedirect;
   var footer = document.getElementsByClassName("footer")[0];
 
   if (footer) {
     document.addEventListener("keyup", function (e) {
       if (e.keyCode === 13) {
-        e.preventDefault();
-        footer.click();
+        updateRedirect(); // e.preventDefault();
+        // footer.click();
       }
     });
   }
@@ -31945,13 +31957,13 @@ var _react = _interopRequireDefault(require("react"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var LowdownHeader = function LowdownHeader(props) {
-  var player = props.player;
+  var searchedPlayer = props.searchedPlayer;
   return _react.default.createElement("h1", {
     className: "header",
     style: {
       top: 0
     }
-  }, "Is ", player, " clean?");
+  }, "Is ", searchedPlayer, " clean?");
 };
 
 var _default = LowdownHeader;
@@ -31983,7 +31995,8 @@ var Lowdown = function Lowdown(props) {
       searchBar = props.searchBar,
       searchedPlayer = props.searchedPlayer,
       clearInput = props.clearInput,
-      handleClick = props.handleClick;
+      handleClick = props.handleClick,
+      updateRedirect = props.updateRedirect;
   return _react.default.createElement(_react.Fragment, null, _react.default.createElement(_LowdownHeader.default, {
     searchedPlayer: searchedPlayer
   }), _react.default.createElement(_Verdict.default, {
@@ -31995,7 +32008,8 @@ var Lowdown = function Lowdown(props) {
   }), _react.default.createElement(_Footer.default, {
     searchBar: searchBar,
     clearInput: clearInput,
-    handleClick: handleClick
+    handleClick: handleClick,
+    updateRedirect: updateRedirect
   }));
 };
 
@@ -33703,12 +33717,14 @@ function (_Component) {
       value: '',
       arrestData: [],
       searchBar: true,
+      redirect: false,
       searchedPlayer: ''
     };
     _this.onChange = _this.onChange.bind(_assertThisInitialized(_this));
     _this.clearInput = _this.clearInput.bind(_assertThisInitialized(_this));
     _this.handleClick = _this.handleClick.bind(_assertThisInitialized(_this));
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
+    _this.updateRedirect = _this.updateRedirect.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -33728,10 +33744,12 @@ function (_Component) {
       this.getArrests(input, function () {
         _this2.setState({
           searchBar: !searchBar,
-          searchedPlayer: input
+          searchedPlayer: input,
+          redirect: true
+        }, function () {
+          console.log(_this2.state);
         });
       });
-      return _react.default.createElement(_reactRouterDom.Link, null);
     }
   }, {
     key: "handleClick",
@@ -33792,6 +33810,17 @@ function (_Component) {
       });
     }
   }, {
+    key: "updateRedirect",
+    value: function updateRedirect() {
+      this.setState({
+        redirect: false
+      }, function () {
+        return _react.default.createElement(_reactRouterDom.Redirect, {
+          to: "/"
+        }), console.log('made it');
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
       var _landingProps;
@@ -33801,10 +33830,12 @@ function (_Component) {
           arrestData = _this$state.arrestData,
           searchedPlayer = _this$state.searchedPlayer,
           players = _this$state.players,
-          value = _this$state.value;
+          value = _this$state.value,
+          redirect = _this$state.redirect;
       var landingProps = (_landingProps = {
         value: value,
         players: players,
+        redirect: redirect,
         searchBar: searchBar
       }, _defineProperty(_landingProps, "searchBar", searchBar), _defineProperty(_landingProps, "onChange", this.onChange), _defineProperty(_landingProps, "handleSubmit", this.handleSubmit), _landingProps);
       var lowdownProps = {
@@ -33812,7 +33843,8 @@ function (_Component) {
         searchBar: searchBar,
         searchedPlayer: searchedPlayer,
         clearInput: this.clearInput,
-        handleClick: this.handleClick
+        handleClick: this.handleClick,
+        updateRedirect: this.updateRedirect
       };
       return _react.default.createElement(_react.Fragment, null, _react.default.createElement(_reactRouterDom.Switch, null, _react.default.createElement(_reactRouterDom.Route, {
         exact: true,

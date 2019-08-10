@@ -3,12 +3,12 @@ import LandingHeader from './LandingHeader';
 import SearchBar from './SearchBar';
 
 const Landing = props => {
-  const { searchBar, value, players, handleSubmit, onChange } = props;
+  const { searchBar, value, players, handleSubmit, onChange, redirect } = props;
 
   return (
     <Fragment>
       <LandingHeader />
-      <SearchBar searchBar={searchBar} value={value} players={players} handleSubmit={handleSubmit} onChange={onChange} />
+      <SearchBar redirect={redirect} searchBar={searchBar} value={value} players={players} handleSubmit={handleSubmit} onChange={onChange} />
     </Fragment>
   );
 }

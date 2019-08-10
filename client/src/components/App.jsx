@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import { Switch, Route, Link } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import Landing from './Landing';
 import Lowdown from './Lowdown';
 import axios from 'axios';
@@ -12,6 +12,7 @@ class App extends Component {
       value: '',
       arrestData: [],
       searchBar: true,
+      redirect: false,
       searchedPlayer: ''
     };
 
@@ -19,6 +20,7 @@ class App extends Component {
     this.clearInput = this.clearInput.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.updateRedirect = this.updateRedirect.bind(this);
   }
 
   componentDidMount() {
@@ -33,11 +35,10 @@ class App extends Component {
     this.getArrests(input, () => { 
       this.setState({ 
         searchBar: !searchBar,
-        searchedPlayer: input
-      });
+        searchedPlayer: input,
+        redirect: true
+      }, () => {console.log(this.state)});
     });
-    
-    return <Link />
   }
 
   handleClick(callback) {
@@ -77,11 +78,16 @@ class App extends Component {
     this.setState({ value: '' });
   }
 
+  updateRedirect() {
+    this.setState({ redirect: false }, () => { return <Redirect to="/" />, console.log('made it') });
+  }
+
   render() {
-    const { searchBar, arrestData, searchedPlayer, players, value } = this.state;
+    const { searchBar, arrestData, searchedPlayer, players, value, redirect } = this.state;
     const landingProps = {
       value: value,
       players: players,
+      redirect: redirect,
       searchBar: searchBar,
       searchBar: searchBar,
       onChange: this.onChange,
@@ -92,7 +98,8 @@ class App extends Component {
       searchBar: searchBar,
       searchedPlayer: searchedPlayer,
       clearInput: this.clearInput,
-      handleClick: this.handleClick
+      handleClick: this.handleClick,
+      updateRedirect: this.updateRedirect
     }
     return (
       <Fragment>
