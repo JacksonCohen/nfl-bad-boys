@@ -2,6 +2,7 @@ import React, { Component, Fragment } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import Landing from "./Landing";
 import Lowdown from "./Lowdown";
+import NotFound from "./NotFound";
 import axios from "axios";
 
 class App extends Component {
@@ -102,6 +103,7 @@ class App extends Component {
         <Switch>
           <Route exact path="/" render={() => <Landing {...landingProps} />} />
           <Route path="/lowdown" render={() => <Lowdown {...lowdownProps} />} />
+          <Route component={NotFound} />
         </Switch>
       </Fragment>
     );

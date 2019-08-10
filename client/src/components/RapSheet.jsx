@@ -32,7 +32,7 @@ class RapSheet extends Component {
 
     return (
       <Fragment>
-        <ol className="numbers">
+        <ol className="centered">
           {crimes &&
             crimes.map((crime, i) => {
               return (

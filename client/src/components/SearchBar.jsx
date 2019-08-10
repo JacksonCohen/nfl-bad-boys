@@ -56,7 +56,7 @@ class SearchBar extends Component {
     };
 
     if (redirect) {
-      return <Redirect to="/lowdown" />
+      return <Redirect to="/lowdown" />;
     }
 
     return (

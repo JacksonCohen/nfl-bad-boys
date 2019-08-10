@@ -31924,7 +31924,7 @@ function (_Component) {
 
       var crimes = this.props.crimes;
       return _react.default.createElement(_react.Fragment, null, _react.default.createElement("ol", {
-        className: "numbers"
+        className: "centered"
       }, crimes && crimes.map(function (crime, i) {
         return _react.default.createElement("li", {
           className: "crime-info",
@@ -32011,7 +32011,30 @@ var Lowdown = function Lowdown(props) {
 
 var _default = Lowdown;
 exports.default = _default;
-},{"react":"../../node_modules/react/index.js","./Footer":"components/Footer.jsx","./Verdict":"components/Verdict.jsx","./RapSheet":"components/RapSheet.jsx","./LowdownHeader":"components/LowdownHeader.jsx"}],"../../node_modules/axios/lib/helpers/bind.js":[function(require,module,exports) {
+},{"react":"../../node_modules/react/index.js","./Footer":"components/Footer.jsx","./Verdict":"components/Verdict.jsx","./RapSheet":"components/RapSheet.jsx","./LowdownHeader":"components/LowdownHeader.jsx"}],"components/NotFound.jsx":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireWildcard(require("react"));
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
+
+var NotFound = function NotFound(props) {
+  return _react.default.createElement(_react.Fragment, null, _react.default.createElement("h1", {
+    className: "centered"
+  }, "Looks like you took a wrong turn."), _react.default.createElement("img", {
+    className: "center-image",
+    src: "https://i.imgur.com/Lhq220r.jpg"
+  }));
+};
+
+var _default = NotFound;
+exports.default = _default;
+},{"react":"../../node_modules/react/index.js"}],"../../node_modules/axios/lib/helpers/bind.js":[function(require,module,exports) {
 'use strict';
 
 module.exports = function bind(fn, thisArg) {
@@ -33672,6 +33695,8 @@ var _Landing = _interopRequireDefault(require("./Landing"));
 
 var _Lowdown = _interopRequireDefault(require("./Lowdown"));
 
+var _NotFound = _interopRequireDefault(require("./NotFound"));
+
 var _axios = _interopRequireDefault(require("axios"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -33845,6 +33870,8 @@ function (_Component) {
         render: function render() {
           return _react.default.createElement(_Lowdown.default, lowdownProps);
         }
+      }), _react.default.createElement(_reactRouterDom.Route, {
+        component: _NotFound.default
       })));
     }
   }]);
@@ -33854,7 +33881,7 @@ function (_Component) {
 
 var _default = App;
 exports.default = _default;
-},{"react":"../../node_modules/react/index.js","react-router-dom":"../../node_modules/react-router-dom/esm/react-router-dom.js","./Landing":"components/Landing.jsx","./Lowdown":"components/Lowdown.jsx","axios":"../../node_modules/axios/index.js"}],"index.js":[function(require,module,exports) {
+},{"react":"../../node_modules/react/index.js","react-router-dom":"../../node_modules/react-router-dom/esm/react-router-dom.js","./Landing":"components/Landing.jsx","./Lowdown":"components/Lowdown.jsx","./NotFound":"components/NotFound.jsx","axios":"../../node_modules/axios/index.js"}],"index.js":[function(require,module,exports) {
 "use strict";
 
 var _react = _interopRequireDefault(require("react"));
