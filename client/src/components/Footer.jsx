@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 
 const Footer = props => {
   const { searchBar, handleClick, clearInput } = props;
@@ -14,13 +14,13 @@ const Footer = props => {
   };
 
   return (
-    <>
+    <Fragment>
       {searchBar ? null : (
         <h3 className="footer" onClick={() => { handleClick(() => { clearInput() }) }}>
           Check another player? Click here!
         </h3>
       )}
-    </>
+    </Fragment>
   );
 };
 

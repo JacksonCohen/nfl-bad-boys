@@ -20,9 +20,13 @@ app.get('/players', (req, res) => {
     if (err) {
       console.error(err, 'Error getting players from database');
     } else {
-      res.send(data)
+      res.send(data);
     }
   })
+});
+
+app.get('/*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../client/dist/index.html'));
 });
 
 app.listen(port, () => {

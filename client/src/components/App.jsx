@@ -1,9 +1,7 @@
-import React, { Component } from 'react';
-import SearchBar from './SearchBar';
-import RapSheet from './RapSheet';
-import Verdict from './Verdict';
-import Header from './Header';
-import Footer from './Footer';
+import React, { Component, Fragment } from 'react';
+import { Switch, Route, Link } from 'react-router-dom';
+import Landing from './Landing';
+import Lowdown from './Lowdown';
 import axios from 'axios';
 
 class App extends Component {
@@ -30,7 +28,7 @@ class App extends Component {
   handleSubmit(e) {
     e.preventDefault();
     let { searchBar } = this.state;
-    let input = document.getElementsByClassName('react-autosuggest__input')[0].value
+    let input = document.getElementsByClassName('react-autosuggest__input')[0].value;
 
     this.getArrests(input, () => { 
       this.setState({ 
@@ -38,6 +36,8 @@ class App extends Component {
         searchedPlayer: input
       });
     });
+    
+    return <Link />
   }
 
   handleClick(callback) {
@@ -79,19 +79,28 @@ class App extends Component {
 
   render() {
     const { searchBar, arrestData, searchedPlayer, players, value } = this.state;
-
+    const landingProps = {
+      value: value,
+      players: players,
+      searchBar: searchBar,
+      searchBar: searchBar,
+      onChange: this.onChange,
+      handleSubmit: this.handleSubmit
+    }
+    const lowdownProps = {
+      crimes: arrestData,
+      searchBar: searchBar,
+      searchedPlayer: searchedPlayer,
+      clearInput: this.clearInput,
+      handleClick: this.handleClick
+    }
     return (
-      <>
-        <Header searchBar={searchBar} player={searchedPlayer} />
-        
-        <SearchBar searchBar={searchBar} handleSubmit={this.handleSubmit} onChange={this.onChange} value={value} players={players} />
-        
-        <Verdict searchBar={searchBar} crimes={arrestData} />
-
-        <RapSheet searchBar={searchBar} crimes={arrestData} />
-
-        <Footer searchBar={searchBar} clearInput={this.clearInput} handleClick={this.handleClick} />
-      </>
+      <Fragment>
+        <Switch>
+          <Route exact path="/" render={() => <Landing {...landingProps} />} />
+          <Route path="/lowdown" render={() => <Lowdown {...lowdownProps} />} />
+        </Switch>
+      </Fragment>
     );
   }
 }

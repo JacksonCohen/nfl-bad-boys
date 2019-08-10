@@ -1,12 +1,10 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 
 class RapSheet extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      crimeDescription: false
-    };
+    this.state = {};
 
     this.handleClick = this.handleClick.bind(this);
   }
@@ -17,7 +15,7 @@ class RapSheet extends Component {
 
   handleClick(crime) {
     this.setState({
-      [crime]: !this.state.crime
+      [crime]: !this.state[crime]
     });
   }
 
@@ -33,7 +31,7 @@ class RapSheet extends Component {
     const { searchBar, crimes } = this.props;
 
     return (
-      <>
+      <Fragment>
         {searchBar ? null : (
           <ol className="numbers">
             {crimes &&
@@ -55,7 +53,7 @@ class RapSheet extends Component {
               })}
           </ol>
         )}
-      </>
+      </Fragment>
     );
   }
 }

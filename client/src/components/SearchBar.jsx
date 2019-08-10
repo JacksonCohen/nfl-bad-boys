@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import Autosuggest from "react-autosuggest";
 
 class SearchBar extends Component {
@@ -55,7 +55,7 @@ class SearchBar extends Component {
     };
 
     return (
-      <>
+      <Fragment>
         {searchBar ? (
           <form className="search-bar" onSubmit={handleSubmit}>
             <Autosuggest
@@ -68,7 +68,7 @@ class SearchBar extends Component {
             />
           </form>
         ) : null}
-      </>
+      </Fragment>
     );
   }
 }
