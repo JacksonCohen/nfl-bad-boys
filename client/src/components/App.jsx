@@ -1,19 +1,18 @@
-import React, { Component, Fragment } from 'react';
-import { Switch, Route, Redirect } from 'react-router-dom';
-import Landing from './Landing';
-import Lowdown from './Lowdown';
-import axios from 'axios';
+import React, { Component, Fragment } from "react";
+import { Switch, Route, Redirect } from "react-router-dom";
+import Landing from "./Landing";
+import Lowdown from "./Lowdown";
+import axios from "axios";
 
 class App extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      value: '',
+      value: "",
       arrestData: [],
-      searchBar: true,
       redirect: false,
-      searchedPlayer: ''
+      searchedPlayer: ""
     };
 
     this.onChange = this.onChange.bind(this);
@@ -29,33 +28,32 @@ class App extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    let { searchBar } = this.state;
-    let input = document.getElementsByClassName('react-autosuggest__input')[0].value;
+    let input = document.getElementsByClassName("react-autosuggest__input")[0].value;
 
     this.getArrests(input, () => { 
-      this.setState({ 
-        searchBar: !searchBar,
+      this.setState({
         searchedPlayer: input,
         redirect: true
-      }, () => {console.log(this.state)});
+      });
     });
   }
 
   handleClick(callback) {
     this.setState({
-      searchBar: !this.state.searchBar,
       arrestData: []
-    }, () => {callback()});
+    }, () => { 
+      this.updateRedirect(callback);
+    });
   }
 
   getArrests(player, callback) {
     axios.get(`/arrests/${player}`)
       .then(({ data }) => this.setState({ arrestData: data }, callback()))
-      .catch(err => console.error(err, 'Error fetching request data'));
+      .catch(err => console.error(err, "Error fetching request data"));
   }
 
   getPlayers() {
-    axios.get('/players')
+    axios.get("/players")
       .then(({ data: players }) => {
         let playerNames = players.map(player => player.name);
         return playerNames;
@@ -65,7 +63,7 @@ class App extends Component {
           players: players
         });
       })
-      .catch(err => console.error(err, 'Error fetching player data'));
+      .catch(err => console.error(err, "Error fetching player data"));
   }
 
   onChange(event, { newValue }) {
@@ -75,27 +73,25 @@ class App extends Component {
   }
 
   clearInput() {
-    this.setState({ value: '' });
+    this.setState({ value: "" });
   }
 
-  updateRedirect() {
-    this.setState({ redirect: false }, () => { return <Redirect to="/" />, console.log('made it') });
+  updateRedirect(callback) {
+    this.setState({ redirect: false }, () => { callback(); });
+    return <Redirect to="/" />;
   }
 
   render() {
-    const { searchBar, arrestData, searchedPlayer, players, value, redirect } = this.state;
+    const { arrestData, searchedPlayer, players, value, redirect } = this.state;
     const landingProps = {
       value: value,
       players: players,
       redirect: redirect,
-      searchBar: searchBar,
-      searchBar: searchBar,
       onChange: this.onChange,
       handleSubmit: this.handleSubmit
     }
     const lowdownProps = {
       crimes: arrestData,
-      searchBar: searchBar,
       searchedPlayer: searchedPlayer,
       clearInput: this.clearInput,
       handleClick: this.handleClick,

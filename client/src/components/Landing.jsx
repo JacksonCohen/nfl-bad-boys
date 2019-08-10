@@ -1,14 +1,14 @@
-import React, { Fragment } from 'react';
-import LandingHeader from './LandingHeader';
-import SearchBar from './SearchBar';
+import React, { Fragment } from "react";
+import LandingHeader from "./LandingHeader";
+import SearchBar from "./SearchBar";
 
 const Landing = props => {
-  const { searchBar, value, players, handleSubmit, onChange, redirect } = props;
+  const { value, players, handleSubmit, onChange, redirect } = props;
 
   return (
     <Fragment>
       <LandingHeader />
-      <SearchBar redirect={redirect} searchBar={searchBar} value={value} players={players} handleSubmit={handleSubmit} onChange={onChange} />
+      <SearchBar redirect={redirect} value={value} players={players} handleSubmit={handleSubmit} onChange={onChange} />
     </Fragment>
   );
 }

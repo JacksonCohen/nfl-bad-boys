@@ -31741,15 +31741,13 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
 
 var Landing = function Landing(props) {
-  var searchBar = props.searchBar,
-      value = props.value,
+  var value = props.value,
       players = props.players,
       handleSubmit = props.handleSubmit,
       onChange = props.onChange,
       redirect = props.redirect;
   return _react.default.createElement(_react.Fragment, null, _react.default.createElement(_LandingHeader.default, null), _react.default.createElement(_SearchBar.default, {
     redirect: redirect,
-    searchBar: searchBar,
     value: value,
     players: players,
     handleSubmit: handleSubmit,
@@ -31769,11 +31767,12 @@ exports.default = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
+var _reactRouterDom = require("react-router-dom");
+
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
 
 var Footer = function Footer(props) {
-  var searchBar = props.searchBar,
-      handleClick = props.handleClick,
+  var handleClick = props.handleClick,
       clearInput = props.clearInput,
       updateRedirect = props.updateRedirect;
   var footer = document.getElementsByClassName("footer")[0];
@@ -31781,26 +31780,30 @@ var Footer = function Footer(props) {
   if (footer) {
     document.addEventListener("keyup", function (e) {
       if (e.keyCode === 13) {
-        updateRedirect(); // e.preventDefault();
-        // footer.click();
+        e.preventDefault();
+        updateRedirect(function () {
+          footer.click();
+        });
       }
     });
   }
 
   ;
-  return _react.default.createElement(_react.Fragment, null, searchBar ? null : _react.default.createElement("h3", {
+  return _react.default.createElement(_react.Fragment, null, _react.default.createElement(_reactRouterDom.Link, {
+    to: "/"
+  }, _react.default.createElement("h3", {
     className: "footer",
     onClick: function onClick() {
       handleClick(function () {
         clearInput();
       });
     }
-  }, "Check another player? Click here!"));
+  }, "Check another player? Click here!")));
 };
 
 var _default = Footer;
 exports.default = _default;
-},{"react":"../../node_modules/react/index.js"}],"components/Verdict.jsx":[function(require,module,exports) {
+},{"react":"../../node_modules/react/index.js","react-router-dom":"../../node_modules/react-router-dom/esm/react-router-dom.js"}],"components/Verdict.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -31813,9 +31816,8 @@ var _react = _interopRequireWildcard(require("react"));
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
 
 var Verdict = function Verdict(props) {
-  var searchBar = props.searchBar,
-      crimes = props.crimes;
-  return _react.default.createElement(_react.Fragment, null, searchBar ? null : crimes.length ? _react.default.createElement("center", {
+  var crimes = props.crimes;
+  return _react.default.createElement(_react.Fragment, null, crimes.length ? _react.default.createElement("center", {
     className: "verdict",
     style: {
       color: "red"
@@ -31920,10 +31922,8 @@ function (_Component) {
     value: function render() {
       var _this2 = this;
 
-      var _this$props = this.props,
-          searchBar = _this$props.searchBar,
-          crimes = _this$props.crimes;
-      return _react.default.createElement(_react.Fragment, null, searchBar ? null : _react.default.createElement("ol", {
+      var crimes = this.props.crimes;
+      return _react.default.createElement(_react.Fragment, null, _react.default.createElement("ol", {
         className: "numbers"
       }, crimes && crimes.map(function (crime, i) {
         return _react.default.createElement("li", {
@@ -31992,7 +31992,6 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 var Lowdown = function Lowdown(props) {
   var crimes = props.crimes,
-      searchBar = props.searchBar,
       searchedPlayer = props.searchedPlayer,
       clearInput = props.clearInput,
       handleClick = props.handleClick,
@@ -32000,13 +31999,10 @@ var Lowdown = function Lowdown(props) {
   return _react.default.createElement(_react.Fragment, null, _react.default.createElement(_LowdownHeader.default, {
     searchedPlayer: searchedPlayer
   }), _react.default.createElement(_Verdict.default, {
-    crimes: crimes,
-    searchBar: searchBar
+    crimes: crimes
   }), _react.default.createElement(_RapSheet.default, {
-    crimes: crimes,
-    searchBar: searchBar
+    crimes: crimes
   }), _react.default.createElement(_Footer.default, {
-    searchBar: searchBar,
     clearInput: clearInput,
     handleClick: handleClick,
     updateRedirect: updateRedirect
@@ -33684,8 +33680,6 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -33714,11 +33708,10 @@ function (_Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(App).call(this, props));
     _this.state = {
-      value: '',
+      value: "",
       arrestData: [],
-      searchBar: true,
       redirect: false,
-      searchedPlayer: ''
+      searchedPlayer: ""
     };
     _this.onChange = _this.onChange.bind(_assertThisInitialized(_this));
     _this.clearInput = _this.clearInput.bind(_assertThisInitialized(_this));
@@ -33739,59 +33732,56 @@ function (_Component) {
       var _this2 = this;
 
       e.preventDefault();
-      var searchBar = this.state.searchBar;
-      var input = document.getElementsByClassName('react-autosuggest__input')[0].value;
+      var input = document.getElementsByClassName("react-autosuggest__input")[0].value;
       this.getArrests(input, function () {
         _this2.setState({
-          searchBar: !searchBar,
           searchedPlayer: input,
           redirect: true
-        }, function () {
-          console.log(_this2.state);
         });
       });
     }
   }, {
     key: "handleClick",
     value: function handleClick(callback) {
+      var _this3 = this;
+
       this.setState({
-        searchBar: !this.state.searchBar,
         arrestData: []
       }, function () {
-        callback();
+        _this3.updateRedirect(callback);
       });
     }
   }, {
     key: "getArrests",
     value: function getArrests(player, callback) {
-      var _this3 = this;
+      var _this4 = this;
 
       _axios.default.get("/arrests/".concat(player)).then(function (_ref) {
         var data = _ref.data;
-        return _this3.setState({
+        return _this4.setState({
           arrestData: data
         }, callback());
       }).catch(function (err) {
-        return console.error(err, 'Error fetching request data');
+        return console.error(err, "Error fetching request data");
       });
     }
   }, {
     key: "getPlayers",
     value: function getPlayers() {
-      var _this4 = this;
+      var _this5 = this;
 
-      _axios.default.get('/players').then(function (_ref2) {
+      _axios.default.get("/players").then(function (_ref2) {
         var players = _ref2.data;
         var playerNames = players.map(function (player) {
           return player.name;
         });
         return playerNames;
       }).then(function (players) {
-        _this4.setState({
+        _this5.setState({
           players: players
         });
       }).catch(function (err) {
-        return console.error(err, 'Error fetching player data');
+        return console.error(err, "Error fetching player data");
       });
     }
   }, {
@@ -33806,41 +33796,39 @@ function (_Component) {
     key: "clearInput",
     value: function clearInput() {
       this.setState({
-        value: ''
+        value: ""
       });
     }
   }, {
     key: "updateRedirect",
-    value: function updateRedirect() {
+    value: function updateRedirect(callback) {
       this.setState({
         redirect: false
       }, function () {
-        return _react.default.createElement(_reactRouterDom.Redirect, {
-          to: "/"
-        }), console.log('made it');
+        callback();
+      });
+      return _react.default.createElement(_reactRouterDom.Redirect, {
+        to: "/"
       });
     }
   }, {
     key: "render",
     value: function render() {
-      var _landingProps;
-
       var _this$state = this.state,
-          searchBar = _this$state.searchBar,
           arrestData = _this$state.arrestData,
           searchedPlayer = _this$state.searchedPlayer,
           players = _this$state.players,
           value = _this$state.value,
           redirect = _this$state.redirect;
-      var landingProps = (_landingProps = {
+      var landingProps = {
         value: value,
         players: players,
         redirect: redirect,
-        searchBar: searchBar
-      }, _defineProperty(_landingProps, "searchBar", searchBar), _defineProperty(_landingProps, "onChange", this.onChange), _defineProperty(_landingProps, "handleSubmit", this.handleSubmit), _landingProps);
+        onChange: this.onChange,
+        handleSubmit: this.handleSubmit
+      };
       var lowdownProps = {
         crimes: arrestData,
-        searchBar: searchBar,
         searchedPlayer: searchedPlayer,
         clearInput: this.clearInput,
         handleClick: this.handleClick,
@@ -33879,7 +33867,7 @@ var _reactRouterDom = require("react-router-dom");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-_reactDom.default.render(_react.default.createElement(_reactRouterDom.BrowserRouter, null, _react.default.createElement(_App.default, null)), document.getElementById('root'));
+_reactDom.default.render(_react.default.createElement(_reactRouterDom.BrowserRouter, null, _react.default.createElement(_App.default, null)), document.getElementById("root"));
 },{"react":"../../node_modules/react/index.js","react-dom":"../../node_modules/react-dom/index.js","./components/App":"components/App.jsx","react-router-dom":"../../node_modules/react-router-dom/esm/react-router-dom.js"}],"../../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';

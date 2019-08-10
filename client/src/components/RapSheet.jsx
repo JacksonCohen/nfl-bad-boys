@@ -28,31 +28,29 @@ class RapSheet extends Component {
   }
 
   render() {
-    const { searchBar, crimes } = this.props;
+    const { crimes } = this.props;
 
     return (
       <Fragment>
-        {searchBar ? null : (
-          <ol className="numbers">
-            {crimes &&
-              crimes.map((crime, i) => {
-                return (
-                  <li
-                    className="crime-info"
-                    key={crime.arrest_stats_id}
-                    onClick={() => this.handleClick(crime.arrest_stats_id)}
-                  >
-                    {crime.Category}
-                    {this.state[crime.arrest_stats_id] ? (
-                      <div className={`crime-info${i}`}>
-                        {` - ${crime.Description}`}
-                      </div>
-                    ) : null}
-                  </li>
-                );
-              })}
-          </ol>
-        )}
+        <ol className="numbers">
+          {crimes &&
+            crimes.map((crime, i) => {
+              return (
+                <li
+                  className="crime-info"
+                  key={crime.arrest_stats_id}
+                  onClick={() => this.handleClick(crime.arrest_stats_id)}
+                >
+                  {crime.Category}
+                  {this.state[crime.arrest_stats_id] ? (
+                    <div className={`crime-info${i}`}>
+                      {` - ${crime.Description}`}
+                    </div>
+                  ) : null}
+                </li>
+              );
+            })}
+        </ol>
       </Fragment>
     );
   }

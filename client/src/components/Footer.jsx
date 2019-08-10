@@ -1,26 +1,26 @@
 import React, { Fragment } from "react";
+import { Link } from "react-router-dom";
 
 const Footer = props => {
-  const { searchBar, handleClick, clearInput, updateRedirect } = props;
+  const { handleClick, clearInput, updateRedirect } = props;
   const footer = document.getElementsByClassName("footer")[0];
 
   if (footer) {
     document.addEventListener("keyup", (e) => {
       if (e.keyCode === 13) {
-        updateRedirect();
-        // e.preventDefault();
-        // footer.click();
+        e.preventDefault();
+        updateRedirect(() => { footer.click(); });
       }
     })
   };
 
   return (
     <Fragment>
-      {searchBar ? null : (
-        <h3 className="footer" onClick={() => { handleClick(() => { clearInput() }) }}>
+      <Link to="/">
+        <h3 className="footer" onClick={() => { handleClick(() => { clearInput(); }); }}>
           Check another player? Click here!
         </h3>
-      )}
+      </Link>
     </Fragment>
   );
 };
