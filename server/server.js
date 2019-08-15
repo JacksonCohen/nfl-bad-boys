@@ -1,13 +1,11 @@
 const express = require('express');
 const path = require('path');
-const morgan = require('morgan');
 const app = express();
 const port = process.env.PORT || 4000;
 const { getPlayerArrestData } = require('./helpers.js');
 const { getPlayersFromDatabase } = require('../database/helpers.js');
 
 app.use(express.static(path.join(__dirname, '../client/dist/')));
-app.use(morgan('dev'));
 
 app.get('/api/arrests/:player', (req, res) => {
   getPlayerArrestData(req.params.player)
