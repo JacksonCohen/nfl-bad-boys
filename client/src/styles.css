@@ -1,9 +1,10 @@
 .crime-info {
-  font-family: "Alegreya SC", serif;
+  font-family: 'Alegreya SC', serif;
   font-weight: 600;
   font-size: 24px;
   position: relative;
   text-align: center;
+  cursor: pointer;
 }
 
 .centered {
@@ -35,7 +36,8 @@
   font-size: 32px;
 }
 
-.header, .footer {
+.header,
+.footer {
   color: #013369;
   font-family: Freshman;
   position: relative;
@@ -57,13 +59,13 @@
   padding: 0 15px;
   font-family: Freshman;
   font-size: 15px;
-  color: #013369; 
+  color: #013369;
   border: 1px solid rgba(136, 129, 129, 0.562);
   border-radius: 4px;
 }
 
 .react-autosuggest__input::placeholder {
-    color: #013369;
+  color: #013369;
 }
 
 .react-autosuggest__input--focused {
@@ -115,9 +117,9 @@
 }
 
 .center-image {
-  width: 35%; 
-  display: block; 
-  margin-left: auto; 
+  width: 35%;
+  display: block;
+  margin-left: auto;
   margin-right: auto;
 }
 
@@ -129,6 +131,6 @@
 }
 
 @font-face {
-  font-family: "Freshman";
-  src: url("/fonts/Freshman.ttf");
+  font-family: 'Freshman';
+  src: url('/fonts/Freshman.ttf');
 }

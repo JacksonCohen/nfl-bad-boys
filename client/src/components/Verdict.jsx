@@ -1,13 +1,16 @@
-import React, { Fragment } from "react";
+import React, { Fragment } from 'react';
 
-const Verdict = props => {
-  const { crimes } = props;
+const Verdict = ({ crimes, searchedPlayer }) => {
+  const color = crimes.length ? 'red' : 'green';
+  const text = crimes.length ? 'NO' : 'YES';
 
   return (
     <Fragment>
-      {crimes.length ? <center className="verdict" style={{color:"red"}}>NO</center> : <center className="verdict" style={{color:"green"}}>YES</center>}
+      <center className='verdict' style={{ color }}>
+        {searchedPlayer ? text : null}
+      </center>
     </Fragment>
   );
-}
+};
 
 export default Verdict;

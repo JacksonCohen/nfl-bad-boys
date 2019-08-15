@@ -1,13 +1,13 @@
-import React, { Component, Fragment } from "react";
-import { Redirect } from "react-router-dom";
-import Autosuggest from "react-autosuggest";
+import React, { Component, Fragment } from 'react';
+import { Redirect } from 'react-router-dom';
+import Autosuggest from 'react-autosuggest';
 
 class SearchBar extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      value: "",
+      value: '',
       suggestions: []
     };
 
@@ -20,8 +20,12 @@ class SearchBar extends Component {
   getSuggestions(value) {
     const inputValue = value.trim().toLowerCase();
     const inputLength = inputValue.length;
-    const suggestions = inputLength === 0 ? [] : this.props.players.filter(
-      player => player.toLowerCase().slice(0, inputLength) === inputValue).slice(0, 8);
+    const suggestions =
+      inputLength === 0
+        ? []
+        : this.props.players
+            .filter(player => player.toLowerCase().slice(0, inputLength) === inputValue)
+            .slice(0, 8);
 
     return suggestions;
   }
@@ -37,14 +41,14 @@ class SearchBar extends Component {
       suggestions: []
     });
   }
-  
-  getSuggestionValue(suggestion) { 
+
+  getSuggestionValue(suggestion) {
     return suggestion;
   }
 
   renderSuggestion(suggestion) {
     return <div>{suggestion}</div>;
-  } 
+  }
 
   render() {
     const { suggestions } = this.state;
@@ -52,16 +56,16 @@ class SearchBar extends Component {
     const inputProps = {
       value,
       onChange,
-      placeholder: "SEARCH FOR A PLAYER e.g. Kenny Britt"
+      placeholder: 'SEARCH FOR A PLAYER e.g. Kenny Britt'
     };
 
     if (redirect) {
-      return <Redirect to="/lowdown" />;
+      return <Redirect to='/lowdown' />;
     }
 
     return (
       <Fragment>
-        <form className="search-bar" onSubmit={handleSubmit}>
+        <form className='search-bar' onSubmit={handleSubmit}>
           <Autosuggest
             suggestions={suggestions}
             onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}

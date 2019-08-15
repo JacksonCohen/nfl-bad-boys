@@ -1,9 +1,14 @@
-import React from "react";
+import React from 'react';
 
-const LowdownHeader = props => {
-  const { searchedPlayer } = props;
-
-  return <h1 className="header" style={{top:0}}>Is {searchedPlayer} clean?</h1>;
-}
+const LowdownHeader = ({ searchedPlayer }) => {
+  const text = searchedPlayer
+    ? `Is ${searchedPlayer} clean?`
+    : 'Click back to search for a new player!';
+  return (
+    <h1 className='header' style={{ top: 0 }}>
+      {text}
+    </h1>
+  );
+};
 
 export default LowdownHeader;

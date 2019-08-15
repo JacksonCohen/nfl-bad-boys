@@ -1,22 +1,29 @@
-import React, { Fragment } from "react";
-import { Link } from "react-router-dom";
+import React, { Fragment, useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
 
-const Footer = props => {
-  const { handleClick, clearInput, updateRedirect } = props;
-  const footer = document.getElementsByClassName("footer")[0];
+const Footer = ({ handleClick }) => {
+  const element = useRef(null);
 
-  if (footer) {
-    document.addEventListener("keyup", (e) => {
-      if (e.keyCode === 13) {
-        handleClick(() => { footer.click(); });
+  useEffect(() => {
+    document.addEventListener('keyup', event => {
+      if (event.keyCode === 13 && element.current !== null) {
+        element.current.click();
       }
     });
-  };
+
+    return () => document.removeEventListener('keyup', () => {});
+  }, []);
 
   return (
     <Fragment>
-      <Link to="/" style={{ textDecoration: "none" }}>
-        <h3 className="footer" onClick={() => { handleClick(() => { clearInput(); }); }}>
+      <Link to='/' style={{ textDecoration: 'none' }}>
+        <h3
+          ref={element}
+          className='footer'
+          onClick={() => {
+            handleClick();
+          }}
+        >
           Check another player? Click here!
         </h3>
       </Link>
