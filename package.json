@@ -23,7 +23,7 @@
   },
   "homepage": "https://github.com/JacksonCohen/nfl-bad-boys#readme",
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "express": "^4.16.4",
     "parcel-bundler": "^1.12.3",
     "react": "^16.8.6",
